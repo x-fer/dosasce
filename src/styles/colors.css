@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand Colors */
+  --color-dosasce-red: #e63047;
+  --color-dosasce-light-red: #fbd3d9;
+  --color-dosasce-black: #191516;
+  --color-dosasce-white: #fdfbfe;
+}
+
+/* Customize text selection appearance */
+::selection {
+  background-color: var(--color-dosasce-red);
+  color: var(--color-dosasce-white);
+}

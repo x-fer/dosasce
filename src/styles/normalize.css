@@ -1,0 +1,131 @@
+/* Custom CSS Normalize based on Josh W Comeau */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    height: 100%;
+    scroll-behavior: smooth;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    text-align: start;
+    direction: ltr;
+  }
+
+  body {
+    min-height: 100vh;
+    font-size: 1rem;
+    line-height: calc(1em + 0.5rem);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Media elements scale responsively and don't overflow */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Form elements inherit font to match layout text */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    word-spacing: inherit;
+    color: currentColor;
+  }
+
+  p {
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  /* Add pointer cursor to clickable form controls and labels */
+  button,
+  a,
+  label,
+  input[type="checkbox"],
+  input[type="radio"],
+  summary,
+  select,
+  option {
+    cursor: pointer;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  /* Simplify table rendering by collapsing spacing */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /* Use monospace system font for code-related elements */
+  code,
+  pre,
+  kbd,
+  samp,
+  var {
+    @apply font-mono;
+  }
+
+  iframe {
+    border: 0;
+  }
+
+  /* Improve readability of underline in unstyled anchor tags only */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+  }
+
+  /* Add scroll offset to internal links using :target */
+  /* :target {
+    scroll-margin-block: 5ex;
+  } */
+
+  /* Create root stacking context for React and Next.js containers */
+  #root,
+  #__next {
+    isolation: isolate;
+  }
+
+  /* Respect reduced motion preferences by disabling most animations and transitions */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

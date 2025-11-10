@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@import "./fonts.css";
+@import "./normalize.css";
+@import "./colors.css";
+@import "./scrollbar.css";
+
+@plugin "@tailwindcss/typography";
+
+@source "../**/*.{js,ts,jsx,tsx}";
