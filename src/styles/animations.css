@@ -3,13 +3,15 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    /* 6 icons * 100px = 600px */
+    transform: translateX(-600px);
   }
 }
 
 @keyframes marquee-right {
   0% {
-    transform: translateX(-50%);
+    /* 6 icons * 100px = 600px */
+    transform: translateX(-600px);
   }
   100% {
     transform: translateX(0);
