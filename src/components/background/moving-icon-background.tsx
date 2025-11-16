@@ -22,6 +22,7 @@ export default function MovingIconBackground() {
       <IconRow direction="left" />
       <IconRow direction="right" />
       <IconRow direction="left" />
+      <IconRow direction="right" />
     </div>
   );
 }

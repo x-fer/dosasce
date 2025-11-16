@@ -24,6 +24,10 @@ const IconRow = ({ direction }: { direction: "left" | "right" }) => {
       {OneIconPattern}
       {OneIconPattern}
       {OneIconPattern}
+      {OneIconPattern}
+      {OneIconPattern}
+      {OneIconPattern}
+      {OneIconPattern}
     </div>
   );
 };
