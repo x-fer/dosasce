@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Icon } from "./icon";
+import { Fragment } from "react/jsx-runtime";
 
 const OneIconPattern = (
   <>
@@ -19,15 +20,11 @@ const IconRow = ({ direction }: { direction: "left" | "right" }) => {
         "flex w-full whitespace-nowrap",
         direction === "left" ? "animate-marquee-left" : "animate-marquee-right",
       )}
+      style={{ willChange: "transform" }}
     >
-      {OneIconPattern}
-      {OneIconPattern}
-      {OneIconPattern}
-      {OneIconPattern}
-      {OneIconPattern}
-      {OneIconPattern}
-      {OneIconPattern}
-      {OneIconPattern}
+      {Array.from({ length: 12 }).map((_, i) => (
+        <Fragment key={i}>{OneIconPattern}</Fragment>
+      ))}
     </div>
   );
 };
