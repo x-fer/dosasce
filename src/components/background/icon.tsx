@@ -13,7 +13,7 @@ const icons = {
   "christmas-tree": ChristmasTree,
   santa: Santa,
   snowflake: Snowflake,
-} as const;
+};
 
 export type IconName = keyof typeof icons;
 
@@ -26,6 +26,10 @@ export const Icon = ({
   size?: string | number;
   className?: string;
 }) => {
+  // Next.js returns SVG imports as objects with a 'src' property
+  const iconSrc =
+    typeof icons[icon] === "string" ? icons[icon] : (icons[icon] as any).src;
+
   return (
     <div
       className={cn("transition-all duration-200 ease-in", className)}
@@ -34,12 +38,14 @@ export const Icon = ({
         minHeight: size ? size : "24px",
         width: size ? size : "24px",
         minWidth: size ? size : "24px",
-        WebkitMaskImage: `url('${icons[icon]}')`,
-        maskImage: `url('${icons[icon]}')`,
+        WebkitMaskImage: `url('${iconSrc}')`,
+        maskImage: `url('${iconSrc}')`,
         WebkitMaskRepeat: "no-repeat",
         WebkitMaskSize: "contain",
         WebkitMaskPosition: "center center",
         maskRepeat: "no-repeat",
+        maskSize: "contain",
+        maskPosition: "center center",
       }}
     />
   );
