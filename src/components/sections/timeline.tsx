@@ -95,9 +95,7 @@ function TimelineCard(props: TimelineCardProps) {
 
       {/* Vertical line for awards on md+ screens - absolutely positioned so it doesn't affect centering */}
       {props.awards && (
-        <div className="absolute top-0 left-1/2 hidden h-1/2 w-2 -translate-x-1/2 md:block">
-          <div className="bg-dosasce-red h-full w-full" />
-        </div>
+        <div className="bg-dosasce-red absolute top-0 left-1/2 hidden h-1/2 w-2 -translate-x-1/2 md:block" />
       )}
 
       <TimelineBox
