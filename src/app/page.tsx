@@ -1,5 +1,9 @@
 import Hero from "@/components/sections/hero";
 import Timeline from "@/components/sections/timeline";
+import About from "@/components/sections/about";
+import Organizers from "@/components/sections/organizers";
+import Contact from "@/components/sections/contact";
+import Footer from "@/components/sections/footer";
 import Separator from "@/components/ui/separator";
 
 export default function Home() {
@@ -12,6 +16,20 @@ export default function Home() {
       <Timeline />
 
       <Separator variant="christmas-tree" />
+
+      <About />
+
+      <Separator variant="crosses" />
+
+      <Organizers />
+
+      <Separator variant="snowflakes" />
+
+      <Contact />
+
+      <Separator variant="christmas-tree" />
+
+      <Footer />
     </main>
   );
 }

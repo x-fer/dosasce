@@ -5,17 +5,17 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: oklch(0.95 0 0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.556 0 0 / 0.3);
+  background: #c1272d;
   border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.556 0 0 / 0.5);
+  background: #a01f24;
 }
 
 ::-webkit-scrollbar-corner {
@@ -23,20 +23,24 @@
 }
 
 /* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: oklch(0.2 0 0);
+}
+
 .dark ::-webkit-scrollbar-thumb {
-  background: oklch(0.708 0 0 / 0.4);
+  background: #c1272d;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.708 0 0 / 0.6);
+  background: #a01f24;
 }
 
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: oklch(0.556 0 0 / 0.3) transparent;
+  scrollbar-color: #c1272d oklch(0.95 0 0);
 }
 
 .dark * {
-  scrollbar-color: oklch(0.708 0 0 / 0.4) transparent;
+  scrollbar-color: #c1272d oklch(0.2 0 0);
 }

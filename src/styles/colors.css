@@ -4,12 +4,14 @@
   /* Brand Colors */
   --color-dosasce-red: #e63047;
   --color-dosasce-light-red: #fbd3d9;
+  --color-dosasce-green: #0c6e30;
+  --color-dosasce-light-green: #d9f2e3;
   --color-dosasce-black: #191516;
   --color-dosasce-white: #fdfbfe;
 }
 
 /* Customize text selection appearance */
 ::selection {
-  background-color: var(--color-dosasce-red);
-  color: var(--color-dosasce-white);
+  background-color: var(--color-dosasce-light-green);
+  color: var(--color-dosasce-black);
 }
