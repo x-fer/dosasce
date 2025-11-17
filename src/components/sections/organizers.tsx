@@ -8,14 +8,16 @@ export default function Organizers() {
       className="bg-dosasce-white flex w-full flex-col items-center justify-center py-12"
     >
       <div className="w-full px-8 md:w-3/4 md:px-0">
-        <h2 className="mb-8 font-serif text-4xl leading-tight font-extrabold tracking-wide">
+        <h2 className="mb-8 font-serif text-3xl leading-tight font-extrabold tracking-wide md:text-4xl">
           ORGANIZATORI
         </h2>
 
         {/* X.FER */}
         <div className="mb-8">
-          <h3 className="mb-3 font-serif text-2xl font-bold">X.FER</h3>
-          <p className="text-justify font-sans text-lg leading-relaxed">
+          <h3 className="mb-3 font-serif text-xl font-bold md:text-2xl">
+            X.FER
+          </h3>
+          <p className="font-sans text-base leading-7 md:text-lg md:leading-relaxed">
             Studentska je udruga na Fakultetu elektrotehnike i računarstva
             nastala s ciljem provođenja vještine Natjecateljsko programiranje.
             Polaznici vještine se upoznaju s primjenom algoritama u rješavanju
@@ -36,10 +38,10 @@ export default function Organizers() {
 
         {/* EESTEC */}
         <div className="mb-8">
-          <h3 className="mb-3 font-serif text-2xl font-bold">
+          <h3 className="mb-3 font-serif text-xl font-bold md:text-2xl">
             EESTEC LC Zagreb
           </h3>
-          <p className="text-justify font-sans text-lg leading-relaxed">
+          <p className="font-sans text-base leading-7 md:text-lg md:leading-relaxed">
             Neprofitna je studentska organizacija sa oko 200 aktivnih članova.
             Radi se o lokalnoj podružnici europske mreže studenata
             elektrotehnike (koja danas okuplja i studente drugih STEM područja).

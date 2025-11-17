@@ -54,14 +54,14 @@ export default function Contact() {
       id="contact"
       className="bg-dosasce-white flex w-full flex-col items-center justify-center"
     >
-      <div className="mb-6 w-full px-8 py-3 text-xl md:w-3/4 md:px-0">
-        <h2 className="pt-5 pb-5 font-serif text-4xl leading-8 font-extrabold tracking-wide">
+      <div className="mb-6 w-full px-8 py-3 md:w-3/4 md:px-0">
+        <h2 className="pt-5 pb-5 font-serif text-3xl leading-8 font-extrabold tracking-wide md:text-4xl">
           KONTAKT
         </h2>
-        <p className="paragraph pb-5 font-sans leading-8 tracking-wide">
+        <p className="paragraph pb-5 font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
           Ako imate bilo kakva pitanja, slobodno nam se obratite!
         </p>
-        <p className="paragraph mb-3 pb-5 font-sans leading-8 tracking-wide">
+        <p className="paragraph mb-3 pb-5 font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
           E-mail:{" "}
           <a
             target="_blank"
