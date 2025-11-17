@@ -10,7 +10,7 @@ type TimelineBoxProps = {
 
 function TimelineBox(props: TimelineBoxProps) {
   return (
-    <div className="border-dosasce-red bg-dosasce-white my-8 flex h-48 w-64 shrink-0 flex-col items-center justify-center rounded-3xl border-8 p-4 md:my-12">
+    <div className="border-dosasce-red bg-dosasce-white z-20 my-8 flex h-48 w-64 shrink-0 flex-col items-center justify-center rounded-3xl border-8 p-4 md:my-12">
       <h1 className="mb-2 font-serif text-5xl">{props.name}</h1>
 
       <p className="font-sans text-2xl">
@@ -43,7 +43,7 @@ function TimelineCard(props: TimelineCardProps) {
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center gap-16 md:w-[768px]",
+        "relative flex w-full items-center justify-center gap-16 md:w-[768px]",
         props.left && "md:flex-row-reverse",
       )}
     >
@@ -53,18 +53,23 @@ function TimelineCard(props: TimelineCardProps) {
       )}
 
       {/* Vertical red line */}
-      <div className="relative w-2 shrink-0 self-stretch">
+      <div
+        className={cn(
+          "relative w-2 shrink-0 self-stretch",
+          props.awards && "md:hidden",
+        )}
+      >
         {props.awards ? (
           <>
-            {/* Half-height vertical red line (top half only) */}
+            {/* Half-height vertical red line  */}
             <div className="bg-dosasce-red absolute top-0 right-0 bottom-1/2 left-0" />
 
-            {/* Horizontal red line to the box */}
-            <div className="bg-dosasce-red absolute top-1/2 right-0 h-2 w-16 translate-x-full -translate-y-1/2" />
+            {/* Horizontal red line to the box (mobile only) */}
+            <div className="bg-dosasce-red absolute top-1/2 right-0 h-2 w-16 translate-x-full -translate-y-1/2 md:hidden" />
 
-            {/* Center circle */}
-            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl" />
-            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+            {/* Center circle (mobile only) */}
+            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl md:hidden" />
+            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full md:hidden" />
           </>
         ) : (
           <>
@@ -87,6 +92,13 @@ function TimelineCard(props: TimelineCardProps) {
           </>
         )}
       </div>
+
+      {/* Vertical line for awards on md+ screens - absolutely positioned so it doesn't affect centering */}
+      {props.awards && (
+        <div className="absolute top-0 left-1/2 hidden h-1/2 w-2 -translate-x-1/2 md:block">
+          <div className="bg-dosasce-red h-full w-full" />
+        </div>
+      )}
 
       <TimelineBox
         name={props.name}
