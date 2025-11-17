@@ -14,7 +14,7 @@ function TimelineBox(props: TimelineBoxProps) {
       <h1 className="mb-2 font-serif text-5xl">{props.name}</h1>
 
       <p className="font-sans text-2xl">
-        {props.endDate ? "od " : ""}
+        {props.endDate && "od "}
         {formatDateHR(props.startDate)}
       </p>
 
@@ -36,6 +36,7 @@ type TimelineCardProps = {
   left?: boolean;
   image?: string;
   location?: string;
+  awards?: boolean;
 };
 
 function TimelineCard(props: TimelineCardProps) {
@@ -51,24 +52,40 @@ function TimelineCard(props: TimelineCardProps) {
         <img src={props.image} className="my-8 hidden w-64 md:my-12 md:block" />
       )}
 
-      {/* Vertical red line with center circle */}
+      {/* Vertical red line */}
       <div className="relative w-2 shrink-0 self-stretch">
-        {/* Vertical red line */}
-        <div className="bg-dosasce-red absolute inset-0" />
+        {props.awards ? (
+          <>
+            {/* Half-height vertical red line (top half only) */}
+            <div className="bg-dosasce-red absolute top-0 right-0 bottom-1/2 left-0" />
 
-        {/* Horizontal red line to the box */}
-        <div
-          className={cn(
-            "bg-dosasce-red absolute top-1/2 h-2 w-16 -translate-y-1/2",
-            props.left
-              ? "left-0 -translate-x-full"
-              : "right-0 translate-x-full",
-          )}
-        />
+            {/* Horizontal red line to the box */}
+            <div className="bg-dosasce-red absolute top-1/2 right-0 h-2 w-16 translate-x-full -translate-y-1/2" />
 
-        {/* Center circle */}
-        <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl" />
-        <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+            {/* Center circle */}
+            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl" />
+            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+          </>
+        ) : (
+          <>
+            {/* Vertical red line */}
+            <div className="bg-dosasce-red absolute inset-0" />
+
+            {/* Horizontal red line to the box */}
+            <div
+              className={cn(
+                "bg-dosasce-red absolute top-1/2 h-2 w-16 -translate-y-1/2",
+                props.left
+                  ? "right-0 translate-x-full md:left-0 md:-translate-x-full"
+                  : "right-0 translate-x-full",
+              )}
+            />
+
+            {/* Center circle */}
+            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl" />
+            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+          </>
+        )}
       </div>
 
       <TimelineBox
@@ -108,10 +125,12 @@ export default function Timeline() {
           />
         );
       })}
-      <TimelineBox
+
+      <TimelineCard
         name="Dodjela"
         startDate={yearConfig.awards.date}
         location={yearConfig.awards.location}
+        awards
       />
     </section>
   );
