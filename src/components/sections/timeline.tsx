@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
+import { cn, formatDateHR } from "@/lib/utils";
 import Image from "next/image";
+import { config } from "@problems/2025/config";
 
 type TimelineCardProps = {
   name: string;
@@ -53,20 +54,11 @@ function TimelineCard(props: TimelineCardProps) {
 
         <p className="font-sans text-2xl">
           {props.endDate ? "od " : ""}
-          {props.startDate.toLocaleDateString("hr", {
-            day: "numeric",
-            month: "numeric",
-          })}
+          {formatDateHR(props.startDate)}
         </p>
 
         {props.endDate && (
-          <p className="font-sans text-2xl">
-            do{" "}
-            {props.endDate.toLocaleDateString("hr", {
-              day: "numeric",
-              month: "numeric",
-            })}
-          </p>
+          <p className="font-sans text-2xl">do {formatDateHR(props.endDate)}</p>
         )}
 
         {props.location && (
@@ -78,54 +70,34 @@ function TimelineCard(props: TimelineCardProps) {
 }
 
 export default function Timeline() {
-  // TODO: Update these dates for 2025
-  const zadatak1 = {
-    startDate: new Date(2025, 11, 14), // December 14, 2025
-    endDate: new Date(2025, 11, 16, 19, 0), // December 16, 2025, 19:00
-  };
+  const yearConfig = config;
 
-  const zadatak2 = {
-    startDate: new Date(2025, 11, 16, 19, 0), // December 16, 2025, 19:00
-    endDate: new Date(2025, 11, 18, 19, 0), // December 18, 2025, 19:00
-  };
-
-  const zadatak3 = {
-    startDate: new Date(2025, 11, 18, 19, 0), // December 18, 2025, 19:00
-    endDate: new Date(2025, 11, 21, 19, 0), // December 21, 2025, 19:00
-  };
-
-  const dodjela = {
-    startDate: new Date(2025, 11, 21, 19, 15), // December 21, 2025, 19:15
-  };
+  const timelineImages = [
+    "/assets/images/mistletoe.png",
+    "/assets/images/snowman.png",
+    "/assets/images/trees.png",
+    "/assets/images/presents.png",
+  ];
 
   return (
     <section id="timeline" className="bg-dosasce-white w-full">
       <div className="bg-snow-pattern relative flex flex-col items-center justify-center px-4 py-16">
-        <TimelineCard
-          name="Zadatak 1"
-          startDate={zadatak1.startDate}
-          endDate={zadatak1.endDate}
-          image="/assets/images/mistletoe.png"
-          left
-        />
-        <TimelineCard
-          name="Zadatak 2"
-          startDate={zadatak2.startDate}
-          endDate={zadatak2.endDate}
-          image="/assets/images/snowman.png"
-        />
-        <TimelineCard
-          name="Zadatak 3"
-          startDate={zadatak3.startDate}
-          endDate={zadatak3.endDate}
-          image="/assets/images/trees.png"
-          left
-        />
+        {yearConfig.problems.map((problem, index) => {
+          return (
+            <TimelineCard
+              key={problem.id}
+              name={problem.title}
+              startDate={problem.startDate}
+              endDate={yearConfig.endTime}
+              image={timelineImages[index]}
+              left={index % 2 === 0}
+            />
+          );
+        })}
         <TimelineCard
           name="Dodjela"
-          startDate={dodjela.startDate}
-          image="/assets/images/presents.png"
-          location="FER, Unska 3, A202, 19:15h"
+          startDate={yearConfig.awards.date}
+          location={yearConfig.awards.location}
         />
       </div>
     </section>

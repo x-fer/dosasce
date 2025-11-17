@@ -6,16 +6,17 @@ This directory stores all competition challenges. Each year has its own folder a
 
 Each year folder includes a `config.ts` file that contains:
 
-- Global dates (competition end time, awards ceremony)
+- Global dates (competition end time - when all problems close, awards ceremony)
 - Awards location and description
+- Problems array with start dates (all problems stay open until endTime)
 
 ## Challenge Structure
 
-Every challenge folder includes three files:
+Every challenge folder includes:
 
-- a markdown file describes the challenge.
-- an image file is an optional illustration for the challenge.
-- a TypeScript file exports two things. The `sanitize` function checks and normalizes the user submission. The `config` object reads the Judge0 endpoint from an environment variable dedicated to that problem.
+- `problem.md` - The problem description in markdown
+- `banner.png` - Optional banner image for the problem
+- `config.ts` - Problem-specific configuration (Judge0 endpoint, sanitize function)
 
 Example layout
 
@@ -23,10 +24,18 @@ Example layout
 problems
  └─ 2025
     ├─ config.ts        # Year-level configuration
-    └─ 1
-       ├─ challenge.md
-       ├─ image.png
-       └─ config.ts     # Problem-specific configuration
+    ├─ 1
+    │  ├─ problem.md    # Problem description
+    │  ├─ banner.png    # Optional banner image
+    │  └─ config.ts     # Problem-specific configuration
+    ├─ 2
+    │  ├─ problem.md
+    │  ├─ banner.png
+    │  └─ config.ts
+    └─ 3
+       ├─ problem.md
+       ├─ banner.png
+       └─ config.ts
 ```
 
 Example year config.ts (`2025/config.ts`)

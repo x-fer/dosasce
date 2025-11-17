@@ -8,12 +8,10 @@ export default function Home() {
       <Hero />
 
       <Separator variant="circles" />
-      <Separator variant="snowflakes" />
 
       <Timeline />
 
       <Separator variant="christmas-tree" />
-      <Separator variant="crosses" />
     </main>
   );
 }

@@ -25,7 +25,7 @@ export default function Separator({ variant = "circles" }: SeparatorProps) {
         backgroundImage: patterns[variant],
         backgroundRepeat: "repeat-x",
         backgroundPosition: "center",
-        backgroundSize: "24px 20px",
+        backgroundSize: "20px 20px",
       }}
     />
   );
