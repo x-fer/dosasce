@@ -18,14 +18,14 @@ function TimelineCard(props: TimelineCardProps) {
         props.left ? "md:flex-row-reverse md:justify-start" : "md:justify-end",
       )}
     >
-      {/* Fixed width container for images */}
-      <div className="mx-14 hidden w-64 shrink-0 md:block">
+      {/* Fixed width container for images - same width as card (320px = w-80) */}
+      <div className="mx-14 hidden w-80 shrink-0 md:block">
         {props.image && (
           <Image
             src={props.image}
             alt={props.name}
-            width={256}
-            height={256}
+            width={320}
+            height={320}
             className="h-auto w-full"
           />
         )}

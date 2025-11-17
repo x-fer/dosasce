@@ -7,11 +7,13 @@ export default function Home() {
     <main className="z-20 flex min-h-screen flex-col items-center">
       <Hero />
 
-      <Separator />
+      <Separator variant="circles" />
+      <Separator variant="snowflakes" />
 
       <Timeline />
 
-      <Separator />
+      <Separator variant="christmas-tree" />
+      <Separator variant="crosses" />
     </main>
   );
 }
