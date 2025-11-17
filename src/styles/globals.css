@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import "./animations.css";
+@import "./backgrounds.css";
 @import "./colors.css";
 @import "./fonts.css";
 @import "./normalize.css";
