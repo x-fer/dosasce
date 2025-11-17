@@ -10,20 +10,24 @@ type TimelineBoxProps = {
 
 function TimelineBox(props: TimelineBoxProps) {
   return (
-    <div className="border-dosasce-red bg-dosasce-white z-20 my-8 flex h-48 w-64 shrink-0 flex-col items-center justify-center rounded-3xl border-8 p-4 md:my-12">
-      <h1 className="mb-2 font-serif text-5xl">{props.name}</h1>
+    <div className="border-dosasce-red bg-dosasce-white z-20 my-8 flex h-40 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border-6 p-2 md:my-12 md:h-48 md:w-64 md:rounded-3xl md:border-8 md:p-4">
+      <h1 className="mb-2 font-serif text-4xl md:text-5xl">{props.name}</h1>
 
-      <p className="font-sans text-2xl">
+      <p className="font-sans text-xl md:text-2xl">
         {props.endDate && "od "}
         {formatDateHR(props.startDate)}
       </p>
 
       {props.endDate && (
-        <p className="font-sans text-2xl">do {formatDateHR(props.endDate)}</p>
+        <p className="font-sans text-xl md:text-2xl">
+          do {formatDateHR(props.endDate)}
+        </p>
       )}
 
       {props.location && (
-        <p className="text-center font-sans text-lg">{props.location}</p>
+        <p className="text-center font-sans text-base md:text-lg">
+          {props.location}
+        </p>
       )}
     </div>
   );
@@ -43,7 +47,7 @@ function TimelineCard(props: TimelineCardProps) {
   return (
     <div
       className={cn(
-        "relative flex w-full items-center justify-center gap-16 md:w-[768px]",
+        "relative flex w-full items-center justify-center gap-12 md:w-[768px] md:gap-16",
         props.left && "md:flex-row-reverse",
       )}
     >
@@ -55,7 +59,7 @@ function TimelineCard(props: TimelineCardProps) {
       {/* Vertical red line */}
       <div
         className={cn(
-          "relative w-2 shrink-0 self-stretch",
+          "relative w-1.5 shrink-0 self-stretch md:w-2",
           props.awards && "md:hidden",
         )}
       >
@@ -65,11 +69,11 @@ function TimelineCard(props: TimelineCardProps) {
             <div className="bg-dosasce-red absolute top-0 right-0 bottom-1/2 left-0" />
 
             {/* Horizontal red line to the box (mobile only) */}
-            <div className="bg-dosasce-red absolute top-1/2 right-0 h-2 w-16 translate-x-full -translate-y-1/2 md:hidden" />
+            <div className="bg-dosasce-red absolute top-1/2 right-0 h-1.5 w-12 translate-x-full -translate-y-1/2 md:hidden" />
 
             {/* Center circle (mobile only) */}
-            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl md:hidden" />
-            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full md:hidden" />
+            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-lg md:hidden" />
+            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full md:hidden" />
           </>
         ) : (
           <>
@@ -79,7 +83,7 @@ function TimelineCard(props: TimelineCardProps) {
             {/* Horizontal red line to the box */}
             <div
               className={cn(
-                "bg-dosasce-red absolute top-1/2 h-2 w-16 -translate-y-1/2",
+                "bg-dosasce-red absolute top-1/2 h-1.5 w-12 -translate-y-1/2 md:h-2 md:w-16",
                 props.left
                   ? "right-0 translate-x-full md:left-0 md:-translate-x-full"
                   : "right-0 translate-x-full",
@@ -87,8 +91,8 @@ function TimelineCard(props: TimelineCardProps) {
             />
 
             {/* Center circle */}
-            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl" />
-            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full" />
+            <div className="bg-dosasce-red absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-lg md:h-8 md:w-8 md:shadow-xl" />
+            <div className="bg-dosasce-white absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full md:h-4 md:w-4" />
           </>
         )}
       </div>
