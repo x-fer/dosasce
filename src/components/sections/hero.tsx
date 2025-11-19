@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import AnnouncementBanner from "./announcement-banner";
 
 export default function Hero() {
   const scrollToTimeline = () => {
@@ -22,12 +23,12 @@ export default function Hero() {
         />
 
         <div className="text-dosasce-red flex flex-col font-serif">
-          <p className="text-xl lg:text-2xl">Dobrodošli na</p>
-          <p className="mt-[-8px] text-5xl lg:mt-[-12px] lg:text-7xl">
+          <AnnouncementBanner title="Zadatak 1" visible />
+          <h1 className="mt-[-8px] text-5xl lg:mt-[-12px] lg:text-7xl">
             došašće++
-          </p>
+          </h1>
           <p className="text-lg lg:text-xl">
-            Božićno natjecanje: Kodirajte čaroliju!
+            Božićno optimizacijsko natjecanje
           </p>
         </div>
       </div>
