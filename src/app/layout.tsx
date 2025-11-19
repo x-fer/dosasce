@@ -1,4 +1,5 @@
 import MovingIconBackground from "@/components/background/moving-icon-background";
+import Header from "@/components/sections/header";
 import { cn } from "@/lib/utils";
 import "@styles/globals.css";
 import { Albert_Sans, Fira_Code } from "next/font/google";
@@ -31,6 +32,7 @@ export default function RootLayout({
           firaCode.variable,
         )}
       >
+        <Header />
         <MovingIconBackground />
         {children}
       </body>
