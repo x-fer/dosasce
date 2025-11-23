@@ -84,7 +84,7 @@ export default function FAQ() {
     >
       <div className="mb-6 w-full px-8 py-3 md:w-3/4 md:px-0">
         <h2 className="pt-5 pb-5 font-serif text-3xl leading-8 font-extrabold tracking-wide md:text-4xl">
-          Često postavljana pitanja
+          ČESTO POSTAVLJANA PITANJA
         </h2>
         {faq?.length > 0 && <Accordion data={faq} />}
       </div>

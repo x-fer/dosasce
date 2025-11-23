@@ -24,7 +24,7 @@ export default function Organizers() {
             složenih problema te uče optimizirati svoja programska rješenja.
             Osim vještine, organiziramo i programerska natjecanja kroz godinu na
             kojima studenti imaju priliku pokazati usvojena znanja, najveće od
-            kojih je AlgoTrade hackathon. Članovi kluba su biviši natjecalji i
+            kojih je AlgoTrade hackathon. Članovi kluba su bivši natjecalji i
             olimpijci, a udruga trenutno broji 20-ak aktivnih te preko 50
             počasnih članova. Naša misija je omogućiti polaznicima vještine
             strukturirano obrazovanje iz algoritama te ih pripremiti za poslovne
@@ -42,7 +42,7 @@ export default function Organizers() {
             EESTEC LC Zagreb
           </h3>
           <p className="font-sans text-base leading-7 md:text-lg md:leading-relaxed">
-            Neprofitna je studentska organizacija sa oko 200 aktivnih članova.
+            Neprofitna je studentska organizacija sa oko 150 aktivnih članova.
             Radi se o lokalnoj podružnici europske mreže studenata
             elektrotehnike (koja danas okuplja i studente drugih STEM područja).
             Glavni fokus udruge je na unaprjeđenju vlastitih članova, ali i
@@ -58,7 +58,7 @@ export default function Organizers() {
         </div>
 
         {/* Logos in a row */}
-        <div className="flex items-center justify-center gap-12 md:gap-16">
+        <div className="flex items-center justify-center gap-8 sm:gap-12 md:gap-16">
           <Link
             href="https://xfer.hr/"
             target="_blank"
@@ -70,7 +70,22 @@ export default function Organizers() {
               alt="X.FER logo"
               width={144}
               height={72}
-              className="h-[48px] w-auto md:h-[72px]"
+              className="h-[48px] w-auto object-contain md:h-[80px]"
+            />
+          </Link>
+
+          <Link
+            href="https://www.fer.unizg.hr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-transform hover:scale-105"
+          >
+            <Image
+              src="/assets/logos/fer.png"
+              alt="FER logo"
+              width={130}
+              height={120}
+              className="h-[80px] w-auto object-contain md:h-[120px]"
             />
           </Link>
 
@@ -86,21 +101,6 @@ export default function Organizers() {
               width={120}
               height={120}
               className="h-[80px] w-auto object-contain md:h-[120px]"
-            />
-          </Link>
-
-          <Link
-            href="https://www.fer.unizg.hr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-transform hover:scale-105"
-          >
-            <Image
-              src="/assets/logos/fer.png"
-              alt="FER logo"
-              width={130}
-              height={120}
-              className="h-[64px] w-auto object-contain md:h-[120px]"
             />
           </Link>
         </div>
