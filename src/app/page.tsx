@@ -23,7 +23,7 @@ export default function Home() {
 
       <Organizers />
 
-      <Separator variant="snowflakes" />
+      <Separator variant="snowflake" />
 
       <Contact />
 
