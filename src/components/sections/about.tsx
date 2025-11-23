@@ -1,3 +1,5 @@
+import { Anchor } from "../ui/anchor";
+
 export default function About() {
   return (
     <section
@@ -9,12 +11,17 @@ export default function About() {
           <b className="font-serif text-xl tracking-wide md:text-2xl">
             došašće++
           </b>{" "}
-          je online božićno natjecanje inspirirano svima nam omiljenim Advent of
-          Codeom. Natjecanje se sastoji od dva kola, a svaki se tjedan otvara
-          optimizacijski zadatak druge vrste.{" "}
+          je online božićno natjecanje inspirirano omiljenim natjecanjem:{" "}
+          <Anchor href="https://adventofcode.com/">Advent of Code</Anchor>.
+          Natjecanje se sastoji od nekoliko kola gdje se u svakom kolu otvara
+          novi optimizacijski zadatak.{" "}
           <b>Svi zadaci su dostupni do kraja natjecanja.</b> Možeš se prijaviti
-          kao školarac, student preddiplomskog ili student diplomskog studija te
-          se natječeš u svojoj kategoriji.
+          kao <strong>školarac</strong>,{" "}
+          <strong>student preddiplomskog studija</strong>,{" "}
+          <strong>student diplomskog studija</strong> te se natječeš u svojoj
+          kategoriji. Također postoji i <strong>open</strong> kategorija koja
+          obuhvaća sve ostale koji ne pripadaju prethodnim kategorijama, a žele
+          sudjelovati.
         </p>
 
         <p className="paragraph pb-5 font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
@@ -26,10 +33,10 @@ export default function About() {
         </p>
 
         <p className="paragraph font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
-          Natjecanje službeno počinje <strong>7. prosinca</strong>, ali
+          Natjecanje službeno počinje <strong>1. prosinca</strong>, ali
           priključiti se možeš bilo kada. Prijavljuješ se preko Google računa, a
           rješenja možeš poslati preko stranice zadataka. Svečana podjela
-          nagrada i druženje održat će se <strong>21. prosinca na FER-u</strong>{" "}
+          nagrada i druženje održat će se <strong>20. prosinca na FER-u</strong>{" "}
           kada ćemo imati priliku čuti kako su oni najbolji riješili zadatke. Ne
           propusti priliku testirati svoje vještine, upoznati druge
           entuzijastične programere i ponešto osvojiti. Pridruži se i doprinesi

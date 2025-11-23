@@ -1,3 +1,5 @@
+import { Anchor } from "../ui/anchor";
+
 export default function Contact() {
   return (
     <section
@@ -12,31 +14,15 @@ export default function Contact() {
           Ako imate bilo kakva pitanja, slobodno nam se obratite!
         </p>
         <p className="paragraph mb-3 pb-5 font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
-          E-mail:{" "}
-          <a
-            target="_blank"
-            className="text-dosasce-red underline hover:opacity-60 active:opacity-80"
-            href="mailto:dosasce@xfer.hr"
-          >
-            dosasce@xfer.hr
-          </a>
+          E-mail: <Anchor href="mailto:dosasce@xfer.hr">dosasce@xfer.hr</Anchor>
           <br />
           Instagram:{" "}
-          <a
-            target="_blank"
-            className="text-dosasce-red underline hover:opacity-60 active:opacity-80"
-            href="https://www.instagram.com/xfer_hr/"
-          >
+          <Anchor href="https://www.instagram.com/xfer_hr/">
             @xfer_hr
-          </a>
-          ,{" "}
-          <a
-            target="_blank"
-            className="text-dosasce-red underline hover:opacity-60 active:opacity-80"
-            href="https://www.instagram.com/eestec_lc_zagreb/"
-          >
+          </Anchor>,{" "}
+          <Anchor href="https://www.instagram.com/eestec_lc_zagreb/">
             @eestec_lc_zagreb
-          </a>
+          </Anchor>
         </p>
       </div>
     </section>
