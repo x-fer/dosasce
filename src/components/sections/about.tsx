@@ -9,38 +9,36 @@ export default function About() {
       <div className="w-full px-8 py-3 md:w-3/4 md:px-0">
         <p className="paragraph pt-5 pb-5 font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
           <b className="font-serif text-xl tracking-wide md:text-2xl">
-            došašće++
+            {" "}
+            došašće++{" "}
           </b>{" "}
-          je online božićno natjecanje inspirirano omiljenim natjecanjem:{" "}
+          je online božićno natjecanje inspirirano omiljenim natjecanjem{" "}
           <Anchor href="https://adventofcode.com/">Advent of Code</Anchor>.
-          Natjecanje se sastoji od nekoliko kola gdje se u svakom kolu otvara
-          novi optimizacijski zadatak.{" "}
-          <b>Svi zadaci su dostupni do kraja natjecanja.</b> Možeš se prijaviti
+          Natjecanje se sastoji od nekoliko kola u kojima se u svakom otvara
+          novi optimizacijski zadatak. Svi zadaci{" "}
+          <strong>dostupni su do kraja natjecanja.</strong> Možeš se prijaviti
           kao <strong>školarac</strong>,{" "}
-          <strong>student preddiplomskog studija</strong>,{" "}
-          <strong>student diplomskog studija</strong> te se natječeš u svojoj
-          kategoriji. Također postoji i <strong>open</strong> kategorija koja
+          <strong>student preddiplomskog studija</strong> ili{" "}
+          <strong>student diplomskog studija</strong> te se natjecati u svojoj
+          kategoriji. Dostupna je i <strong>open</strong> kategorija koja
           obuhvaća sve ostale koji ne pripadaju prethodnim kategorijama, a žele
           sudjelovati.
         </p>
 
-        <p className="paragraph pb-5 font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
-          Očekuje te mnoštvo nagrada! Uz kekse i čokolade možeš osvojiti majice,
-          slušalice, ulaznice za Muzej iluzija / Smashit i još puno toga!
-          Dodijeljivat će se nagrade pobjednicima svakog kola, nagrade za ukupne
-          pobjednike natjecanja te utješne nagrade za svakoga. Najupornije ćemo
-          također nagraditi došašće++ majicama.
-        </p>
-
         <p className="paragraph font-sans text-base leading-7 tracking-wide md:text-lg md:leading-8">
-          Natjecanje službeno počinje <strong>1. prosinca</strong>, ali
-          priključiti se možeš bilo kada. Prijavljuješ se preko Google računa, a
-          rješenja možeš poslati preko stranice zadataka. Svečana podjela
-          nagrada i druženje održat će se <strong>20. prosinca na FER-u</strong>{" "}
-          kada ćemo imati priliku čuti kako su oni najbolji riješili zadatke. Ne
-          propusti priliku testirati svoje vještine, upoznati druge
-          entuzijastične programere i ponešto osvojiti. Pridruži se i doprinesi
-          čaroliji blagdanskog programiranja!
+          {" "}
+          Natjecanje službeno počinje <strong>1. prosinca u 00:01</strong>, a
+          završava <strong>19. prosinca u 23:59</strong>, no priključiti se
+          možeš u bilo kojem trenutku. Prijavljuješ se putem Google računa, a
+          rješenja predaješ na stranicama zadataka. Svečana dodjela nagrada i
+          druženje održat će se <strong>20. prosinca na FER-u</strong>, gdje
+          ćemo čuti kako su najbolji sudionici pristupili zadacima. Očekuje te
+          mnogo nagrada, od keksa i čokolada do majica i drugih poklona. Nagrade
+          se dodjeljuju pobjednicima svake kategorije te ukupnim pobjednicima
+          natjecanja, a tu su i utješne nagrade za sve sudionike. Iskoristi
+          priliku pokazati svoje vještine, upoznati druge entuzijastične
+          programere i osvojiti nešto usput. Pridruži se i doprinesi blagdanskom
+          programerskom duhu.{" "}
         </p>
       </div>
     </section>
