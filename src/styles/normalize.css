@@ -107,9 +107,9 @@
   }
 
   /* Add scroll offset to internal links using :target */
-  /* :target {
-    scroll-margin-block: 5ex;
-  } */
+  :target {
+    scroll-margin-block: 60px;
+  }
 
   /* Create root stacking context for React and Next.js containers */
   #root,

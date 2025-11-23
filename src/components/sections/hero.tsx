@@ -1,15 +1,9 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import AnnouncementBanner from "./announcement-banner";
 
 export default function Hero() {
-  const scrollToTimeline = () => {
-    const timelineSection = document.getElementById("timeline");
-    timelineSection?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section className="relative flex h-screen w-full items-center justify-center">
       <div className="flex flex-col justify-start gap-8 rounded-3xl p-8 pb-10 lg:flex-row lg:items-center lg:gap-36 lg:rounded-[60px] lg:p-12 lg:pr-10">
@@ -34,13 +28,13 @@ export default function Hero() {
       </div>
 
       {/* Bouncing arrow */}
-      <button
-        onClick={scrollToTimeline}
+      <Link
+        href="#timeline"
         className="text-dosasce-red hover:text-dosasce-dark-red absolute bottom-2 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer transition-colors md:bottom-10"
         aria-label="Scroll to timeline"
       >
         <ChevronDown size={48} strokeWidth={3} />
-      </button>
+      </Link>
     </section>
   );
 }
