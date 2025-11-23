@@ -1,6 +1,31 @@
+import Link from "next/link";
 import Accordion, { type AccordionItem } from "@/components/ui/accordion";
 
 const faq: AccordionItem[] = [
+  {
+    title: "Kako natjecanje funkcionira?",
+    content:
+      "Svaki tjedan otvara se jedan novi zadatak koji možete rješavati do samog kraja natjecanja.",
+  },
+  {
+    title: "Kakve zadatke mogu očekivati?",
+    content: (
+      <>
+        Svi zadatci su optimizacijskog tipa. Problem ima golemi broj mogućih
+        rješenja, znatno veći od 10<sup>10</sup>. Postoji teoretski optimalno
+        rješenje, ali ga je gotovo nemoguće pronaći u realnom vremenu. Cilj je
+        osmisliti algoritam koji pronalazi što bolje rješenje u ograničenom
+        vremenu. Primjer zadatka možete pronaći{" "}
+        <Link
+          href="/problem/3"
+          className="text-dosasce-red underline hover:opacity-60"
+        >
+          ovdje
+        </Link>
+        .
+      </>
+    ),
+  },
   {
     title: "Tko se može natjecati?",
     content:
