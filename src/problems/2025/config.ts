@@ -9,23 +9,17 @@ export const config = {
   problems: [
     {
       id: 1,
-      title: "Zadatak 1",
       startDate: new Date(2025, 11, 1, 0, 0), // 1.12.2025. 00:00 Croatian time
-      banner: "/problems/2025/1/banner.png",
       sanitize: (input: string) => input.trim(),
     },
     {
       id: 2,
-      title: "Zadatak 2",
       startDate: new Date(2025, 11, 6, 0, 0), // 6.12.2025. 00:00 Croatian time
-      banner: "/problems/2025/2/banner.png",
       sanitize: (input: string) => input.trim(),
     },
     {
       id: 3,
-      title: "Zadatak 3",
       startDate: new Date(2025, 11, 13, 0, 0), // 13.12.2025. 00:00 Croatian time
-      banner: "/problems/2025/3/banner.png",
       sanitize: (input: string) => input.trim(),
     },
   ],

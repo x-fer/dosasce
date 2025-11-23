@@ -131,7 +131,7 @@ export default function Timeline() {
         return (
           <TimelineCard
             key={problem.id}
-            name={problem.title}
+            name={"Zadatak " + problem.id}
             startDate={problem.startDate}
             endDate={yearConfig.endTime}
             image={timelineImages[index]}

@@ -8,10 +8,11 @@ import {
   createContext,
   useContext,
 } from "react";
-import Link from "next/link";
+
 import { Trophy, Code, LogIn, User, Menu, X } from "lucide-react";
 import Separator from "@/components/ui/separator";
 import { useAuth } from "@/features/auth/useAuth";
+import { Anchor } from "./anchor";
 
 type LinkItem = {
   id: string | number;
@@ -137,14 +138,15 @@ export function DropdownItem({
 
   if (href) {
     return (
-      <Link
+      <Anchor
         href={href}
+        styled={false}
         className={`${baseClassName} ${className}`}
         onClick={handleClick}
         role="menuitem"
       >
         {children}
-      </Link>
+      </Anchor>
     );
   }
 
@@ -248,14 +250,15 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
             </div>
             <div className="space-y-0.5">
               {tasks.map((task) => (
-                <Link
+                <Anchor
                   key={task.id}
                   href={task.href}
                   onClick={close}
+                  styled={false}
                   className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
                 >
                   {task.title}
-                </Link>
+                </Anchor>
               ))}
             </div>
           </div>
@@ -273,28 +276,30 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
             </div>
             <div className="space-y-0.5">
               {leaderboards.map((leaderboard) => (
-                <Link
+                <Anchor
                   key={leaderboard.id}
                   href={leaderboard.href}
                   onClick={close}
+                  styled={false}
                   className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
                 >
                   {leaderboard.title}
-                </Link>
+                </Anchor>
               ))}
             </div>
           </div>
 
           {/* Arhiva Section */}
           <div className="border-dosasce-light-red border-t-2 pt-2 md:pt-3">
-            <Link
+            <Anchor
               href="/arhiva"
               onClick={close}
+              styled={false}
               className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red flex items-center gap-2 rounded-lg px-3 py-1 font-sans text-xs transition-all duration-150 md:px-4 md:py-1.5 md:text-sm"
             >
               <span className="font-semibold">Arhiva</span>
               <span className="text-dosasce-black/60">Prethodne godine</span>
-            </Link>
+            </Anchor>
           </div>
 
           {/* Login/User Section */}
