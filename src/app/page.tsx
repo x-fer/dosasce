@@ -3,6 +3,7 @@ import Timeline from "@/components/sections/timeline";
 import About from "@/components/sections/about";
 import Organizers from "@/components/sections/organizers";
 import Contact from "@/components/sections/contact";
+import FAQ from "@/components/sections/faq";
 import Footer from "@/components/sections/footer";
 import Separator from "@/components/ui/separator";
 
@@ -26,6 +27,10 @@ export default function Home() {
       <Separator variant="snowflake" />
 
       <Contact />
+
+      <Separator variant="candy-cane" />
+
+      <FAQ />
 
       <Separator variant="christmas-tree" />
 
