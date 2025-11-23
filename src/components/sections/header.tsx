@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { HeaderDropdown } from "@/components/ui/dropdown";
 import { config } from "@problems/2025/config";
