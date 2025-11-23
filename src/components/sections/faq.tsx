@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Accordion, { type AccordionItem } from "@/components/ui/accordion";
+import { Anchor } from "../ui/anchor";
 
 const faq: AccordionItem[] = [
   {
@@ -16,12 +16,12 @@ const faq: AccordionItem[] = [
         rješenje, ali ga je gotovo nemoguće pronaći u realnom vremenu. Cilj je
         osmisliti algoritam koji pronalazi što bolje rješenje u ograničenom
         vremenu. Primjer zadatka možete pronaći{" "}
-        <Link
-          href="/problem/3"
+        <Anchor
+          href="/problem/example"
           className="text-dosasce-red underline hover:opacity-60"
         >
           ovdje
-        </Link>
+        </Anchor>
         .
       </>
     ),

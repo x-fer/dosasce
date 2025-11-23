@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 export type AccordionItem = {
-  title: string;
-  content: string | React.ReactNode;
+  title: React.ReactNode;
+  content: React.ReactNode;
 };
 
 export default function Accordion({ data }: { data: AccordionItem[] }) {
