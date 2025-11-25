@@ -1,6 +1,8 @@
 import MovingIconBackground from "@/components/background/moving-icon-background";
 import Footer from "@/components/sections/footer";
 import Header from "@/components/sections/header";
+import QueryProvider from "@/components/providers/query-provider";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import "@styles/globals.css";
 import { Albert_Sans, Fira_Code } from "next/font/google";
@@ -33,11 +35,14 @@ export default function RootLayout({
           firaCode.variable,
         )}
       >
-        <Header />
         <MovingIconBackground />
-        {children}
 
-        <Footer />
+        <QueryProvider>
+          <Header />
+          {children}
+          <Footer />
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );
