@@ -3,21 +3,21 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import Button from "@/components/ui/button";
+import { Anchor } from "@/components/ui/anchor";
+import { usePathname } from "next/navigation";
+import { getProblemYearAndId } from "@/lib/problem";
 
-export default function SolutionBox({ problemId }: { problemId: string }) {
+export default function SolutionBox({
+  sanitize: _sanitize,
+}: {
+  sanitize: (input: string) => void;
+}) {
+  const pathname = usePathname();
+  const { year, id } = getProblemYearAndId(pathname, "problem");
+
   const mutation = useMutation({
-    mutationFn: async (solution: string) => {
-      // TODO: Add your submission logic here
-      // Example: const response = await fetch('/api/submit-solution', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ solution, problemId }),
-      // });
-      // if (!response.ok) throw new Error('Submission failed');
-      // return response.json();
-
-      // Simulate API call for now
+    mutationFn: async (_: string) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Solution:", solution, "Problem ID:", problemId);
       return { success: true };
     },
     onSuccess: () => {
@@ -37,9 +37,6 @@ export default function SolutionBox({ problemId }: { problemId: string }) {
 
     toast.promise(mutation.mutateAsync(solution), {
       loading: "Rješenje se šalje...",
-      success: "Rješenje uspješno poslano!",
-      error:
-        "Došlo je do greške pri slanju rješenja. Molimo pokušajte ponovno.",
     });
   }
 
@@ -62,7 +59,16 @@ export default function SolutionBox({ problemId }: { problemId: string }) {
             : "Došlo je do greške pri slanju rješenja."}
         </p>
       )}
-      <div className="mt-4 flex justify-end">
+      <div className={"mt-4 flex items-center justify-end"}>
+        {year && id && (
+          <Anchor
+            href={`/leaderboard/${year}/${id}`}
+            styled={false}
+            className="text-dosasce-red hover:text-dosasce-red/80 transition-colors"
+          >
+            Rang lista za ovaj zadatak
+          </Anchor>
+        )}
         <Button
           type="submit"
           variant="default"
