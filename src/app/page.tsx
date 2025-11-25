@@ -31,10 +31,6 @@ export default function Home() {
       <Separator variant="candy-cane" />
 
       <FAQ />
-
-      <Separator variant="christmas-tree" />
-
-      <Footer />
     </main>
   );
 }

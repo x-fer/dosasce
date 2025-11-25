@@ -1,4 +1,5 @@
 import MovingIconBackground from "@/components/background/moving-icon-background";
+import Footer from "@/components/sections/footer";
 import Header from "@/components/sections/header";
 import { cn } from "@/lib/utils";
 import "@styles/globals.css";
@@ -35,6 +36,8 @@ export default function RootLayout({
         <Header />
         <MovingIconBackground />
         {children}
+
+        <Footer />
       </body>
     </html>
   );
