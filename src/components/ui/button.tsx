@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline" | "ghost";
+  variant?: "default" | "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
   children: ReactNode;
@@ -22,8 +22,10 @@ export default function Button({
     "relative inline-flex items-center justify-center font-sans font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const variants = {
-    primary:
+    default:
       "bg-dosasce-red text-dosasce-white hover:bg-dosasce-red/90 focus:ring-dosasce-red",
+    primary:
+      "bg-dosasce-green text-dosasce-white hover:bg-dosasce-green/90 focus:ring-dosasce-green",
     secondary:
       "bg-dosasce-light-red text-dosasce-black hover:bg-dosasce-light-red/80 focus:ring-dosasce-light-red",
     outline:

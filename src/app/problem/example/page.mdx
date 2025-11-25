@@ -1,4 +1,5 @@
 import CoverImage from "@/components/ui/cover-image";
+import InputChecker from "@/components/widgets/input-checker";
 
 <CoverImage src="/problems/example/cover.jpg" alt="Vilenjaci" />
 
@@ -76,6 +77,11 @@ Vaš ukupan broj bodova bit će zbroj ovih dvaju kriterija:
 **70% bodova:** Najmanja maksimalna Hammingova udaljenost, broj bodova računa se prema formuli (100 - max(Hammingova_udaljenost(s, si))) / 100, gdje je s vaš izlazni string, si je svaki ulazni string, a 100 je duljina ulaznih stringova
 
 **30% bodova:** Minimalna suma Hammingovih udaljenosti, broj bodova računa se kao (1000 _ 100 - suma) / (1000 _ 100) gdje je 1000 broj ulaznih stringova, 100 je duljina svakog stringa, a suma je suma svih Hammingovih udaljenosti.
+
+<InputChecker
+  inputFileUrl="/problems/example/input.txt"
+  checkerFileUrl="/problems/example/checker.py"
+/>
 
 ### Ulazni podaci
 
