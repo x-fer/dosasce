@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const backendUrl = process.env.BACKEND_URL;
+    const backendUrl = `${process.env.BACKEND_URL}/submit`;
     if (!backendUrl) {
       throw new Error("BACKEND_URL is not configured");
     }
