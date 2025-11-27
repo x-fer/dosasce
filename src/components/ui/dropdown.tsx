@@ -317,7 +317,7 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
                   <span>Prijavi se</span>
                 </button>
               ) : (
-                <div className="flex justify-between space-y-1 md:space-y-1.5">
+                <div className="flex items-center gap-2 space-y-1 md:space-y-1.5">
                   <div className="flex items-center gap-2 px-3 py-1 md:gap-3 md:px-4 md:py-1.5">
                     {user.user_metadata?.avatar_url ? (
                       <img
@@ -340,7 +340,7 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
                       logout();
                       close();
                     }}
-                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red w-full rounded-lg py-1 pr-3 pl-6 text-left font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
+                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red flex-1 rounded-lg px-3 py-1 text-center font-sans text-xs transition-all duration-150 md:px-4 md:py-1.5 md:text-sm"
                   >
                     Odjavi se
                   </button>
