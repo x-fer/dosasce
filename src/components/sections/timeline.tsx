@@ -1,5 +1,5 @@
+import { getConfig } from "@/lib/config";
 import { cn, formatDateHR } from "@/lib/utils";
-import { config } from "@problems/2025/config";
 
 type TimelineBoxProps = {
   name: string;
@@ -113,7 +113,7 @@ function TimelineCard(props: TimelineCardProps) {
 }
 
 export default function Timeline() {
-  const yearConfig = config;
+  const yearConfig = getConfig(2025);
 
   const timelineImages = [
     "/assets/images/mistletoe.png",

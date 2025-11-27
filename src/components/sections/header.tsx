@@ -1,18 +1,19 @@
 import { HeaderDropdown } from "@/components/ui/dropdown";
-import { config } from "@problems/2025/config";
 import { Anchor } from "../ui/anchor";
+import { getConfig } from "@/lib/config";
 
 export default function Header() {
+  const config = getConfig(2025);
   const tasks = config.problems.map((problem) => ({
     id: problem.id,
     title: "Zadatak " + problem.id,
-    href: `/problem/${problem.id}`,
+    href: `/problem/${config.year}/${problem.id}`,
   }));
 
   const leaderboards = config.problems.map((problem) => ({
     id: problem.id,
     title: "Zadatak " + problem.id,
-    href: `/leaderboard/${problem.id}`,
+    href: `/leaderboard/${config.year}/${problem.id}`,
   }));
 
   return (
