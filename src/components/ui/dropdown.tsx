@@ -13,6 +13,7 @@ import { Trophy, Code, LogIn, User, Menu, X } from "lucide-react";
 import Separator from "@/components/ui/separator";
 import { useAuth } from "@/features/auth/useAuth";
 import { Anchor } from "./anchor";
+import Button from "./button";
 
 type LinkItem = {
   id: string | number;
@@ -335,7 +336,8 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
                       {user.user_metadata?.full_name || "Korisnik"}
                     </span>
                   </div>
-                  <button
+                  <Button
+                    variant="secondary"
                     onClick={() => {
                       logout();
                       close();
@@ -343,7 +345,7 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
                     className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red flex-1 rounded-lg px-3 py-1 text-center font-sans text-xs transition-all duration-150 md:px-4 md:py-1.5 md:text-sm"
                   >
                     Odjavi se
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>
