@@ -17,7 +17,7 @@ export default function SolutionBox({
 
   const mutation = useMutation({
     mutationFn: async (user_solution: string) => {
-      const response = await fetch("/api/judge", {
+      const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
