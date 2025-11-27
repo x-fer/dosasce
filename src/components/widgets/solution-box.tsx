@@ -6,11 +6,16 @@ import Button from "@/components/ui/button";
 import { Anchor } from "@/components/ui/anchor";
 import { usePathname } from "next/navigation";
 import { getProblemYearAndId } from "@/lib/problem";
+import {
+  RESPONSE_TYPE,
+  type SanitizeFunction,
+  type SubmissionResponse,
+} from "@/lib/types";
 
 export default function SolutionBox({
-  sanitize: _sanitize,
+  sanitize,
 }: {
-  sanitize: (input: string) => void;
+  sanitize: SanitizeFunction;
 }) {
   const pathname = usePathname();
   const { year, id } = getProblemYearAndId(pathname, "problem");
@@ -29,24 +34,22 @@ export default function SolutionBox({
         }),
       });
 
-      const data = await response.json();
+      const data: SubmissionResponse = await response.json();
 
-      if (data.type === "warning") {
-        throw { type: "warning", message: data.value };
+      if (data.type === RESPONSE_TYPE.WARNING) {
+        throw { type: RESPONSE_TYPE.WARNING, message: data.value };
       }
 
-      if (data.type === "error") {
+      if (data.type === RESPONSE_TYPE.ERROR) {
         throw new Error(data.value);
       }
 
-      if (data.type === "success") {
+      if (data.type === RESPONSE_TYPE.SUCCESS) {
         return data;
       }
 
       if (!response.ok) {
-        throw new Error(
-          data.error || data.value || "Failed to submit solution",
-        );
+        throw new Error("Failed to submit solution");
       }
 
       return data;
@@ -56,12 +59,19 @@ export default function SolutionBox({
   async function handleSubmit(formData: FormData) {
     const solution = formData.get("solution") as string;
 
+    const sanitizeResult = sanitize(solution);
+
+    if (sanitizeResult.type === RESPONSE_TYPE.ERROR) {
+      toast.error(sanitizeResult.value);
+      return;
+    }
+
     const loadingToast = toast.loading("Rješenje se šalje...");
 
     try {
       const result = await mutation.mutateAsync(solution);
 
-      if (result.type === "success") {
+      if (result.type === RESPONSE_TYPE.SUCCESS) {
         toast.dismiss(loadingToast);
         toast.success(`Uspjeh, vaš rezultat: ${result.value}`);
       }
@@ -72,7 +82,7 @@ export default function SolutionBox({
         error &&
         typeof error === "object" &&
         "type" in error &&
-        error.type === "warning"
+        error.type === RESPONSE_TYPE.WARNING
       ) {
         const warningMessage =
           typeof error === "object" && "message" in error

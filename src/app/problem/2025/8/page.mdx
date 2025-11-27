@@ -1,6 +1,7 @@
 import CoverImage from "@/components/ui/cover-image";
 import InputChecker from "@/components/widgets/input-checker";
 import SolutionBox from "@/components/widgets/solution-box";
+import { config } from "@/problems/2025/config";
 
 <CoverImage src="/problems/example/cover.jpg" alt="Vilenjaci" />
 
@@ -92,4 +93,4 @@ Izlazni niz od 100 slova koji zadovoljava navedene kriterije i ostvaruje maksima
   checkerFileUrl="/problems/2025/8/checker.py"
 />
 
-<SolutionBox />
+<SolutionBox sanitize={config.problems[8].sanitize} />

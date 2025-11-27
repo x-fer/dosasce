@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { RESPONSE_TYPE } from "@/lib/types";
 
 export const runtime = "edge";
 
@@ -61,7 +62,7 @@ export async function POST(request: Request) {
     if (!rateLimitCheck.allowed) {
       return NextResponse.json(
         {
-          type: "warning",
+          type: RESPONSE_TYPE.WARNING,
           value: rateLimitCheck.message,
         },
         { status: 429 },
@@ -72,14 +73,17 @@ export async function POST(request: Request) {
 
     if (!user_solution) {
       return NextResponse.json(
-        { type: "error", value: "User solution is required" },
+        { type: RESPONSE_TYPE.ERROR, value: "User solution is required" },
         { status: 400 },
       );
     }
 
     if (!year_id || !problem_id) {
       return NextResponse.json(
-        { type: "error", value: "Year ID and Problem ID are required" },
+        {
+          type: RESPONSE_TYPE.ERROR,
+          value: "Year ID and Problem ID are required",
+        },
         { status: 400 },
       );
     }
@@ -105,7 +109,10 @@ export async function POST(request: Request) {
       const errorText = await backendResponse.text();
       console.error("Backend error:", errorText);
       return NextResponse.json(
-        { type: "error", value: "Failed to submit solution to backend" },
+        {
+          type: RESPONSE_TYPE.ERROR,
+          value: "Failed to submit solution to backend",
+        },
         { status: backendResponse.status },
       );
     }
@@ -117,14 +124,14 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      type: "error",
+      type: RESPONSE_TYPE.ERROR,
       value: "Unexpected response format from backend",
     });
   } catch (error: unknown) {
     console.error("Judge error:", error);
     return NextResponse.json(
       {
-        type: "error",
+        type: RESPONSE_TYPE.ERROR,
         value: error instanceof Error ? error.message : "Internal Server Error",
       },
       { status: 500 },
