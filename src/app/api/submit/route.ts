@@ -53,7 +53,10 @@ export async function POST(request: Request) {
 
     if (authError || !user) {
       return NextResponse.json(
-        { error: "Unauthorized. Please log in to submit solutions." },
+        {
+          type: RESPONSE_TYPE.ERROR,
+          value: "Unauthorized. Please log in to submit solutions.",
+        },
         { status: 401 },
       );
     }
@@ -89,6 +92,7 @@ export async function POST(request: Request) {
     }
 
     const backendUrl = `${process.env.BACKEND_URL}/submit`;
+
     if (!backendUrl) {
       throw new Error("BACKEND_URL is not configured");
     }

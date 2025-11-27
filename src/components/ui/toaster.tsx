@@ -13,6 +13,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme="light"
+      richColors
       className="toaster group"
       position="bottom-right"
       icons={{
@@ -27,20 +28,31 @@ const Toaster = ({ ...props }: ToasterProps) => {
           toast: "font-sans border-2 rounded-xl",
           title: "font-serif font-bold",
           description: "font-sans",
-          success:
-            "bg-dosasce-light-green text-dosasce-green border-dosasce-green",
-          error: "bg-dosasce-light-red text-dosasce-red border-dosasce-red",
-          warning:
-            "bg-dosasce-light-yellow text-dosasce-yellow border-dosasce-yellow",
-          info: "bg-dosasce-light-red text-dosasce-black border-dosasce-red",
-          loading:
-            "bg-dosasce-white text-dosasce-black border-dosasce-light-red",
         },
         style: {
           padding: "16px",
           fontSize: "14px",
         },
       }}
+      style={
+        {
+          "--success-bg": "#d9f2e3",
+          "--success-text": "#0c6e30",
+          "--success-border": "#0c6e30",
+          "--error-bg": "#fbd3d9",
+          "--error-text": "#e63047",
+          "--error-border": "#e63047",
+          "--warning-bg": "#fef3c7",
+          "--warning-text": "#f59e0b",
+          "--warning-border": "#f59e0b",
+          "--info-bg": "#fbd3d9",
+          "--info-text": "#191516",
+          "--info-border": "#e63047",
+          "--normal-bg": "#fdfbfe",
+          "--normal-text": "#191516",
+          "--normal-border": "#fbd3d9",
+        } as React.CSSProperties
+      }
       {...props}
     />
   );

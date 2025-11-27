@@ -6,22 +6,20 @@ import Button from "@/components/ui/button";
 import { Anchor } from "@/components/ui/anchor";
 import { usePathname } from "next/navigation";
 import { getProblemYearAndId } from "@/lib/problem";
-import {
-  RESPONSE_TYPE,
-  type SanitizeFunction,
-  type SubmissionResponse,
-} from "@/lib/types";
+import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
+import { getConfig } from "@/lib/config";
 
-export default function SolutionBox({
-  sanitize,
-}: {
-  sanitize: SanitizeFunction;
-}) {
+export default function SolutionBox() {
   const pathname = usePathname();
   const { year, id } = getProblemYearAndId(pathname, "problem");
 
+  const yearConfig = getConfig(year);
+  const sanitize = yearConfig?.problems.find(
+    (problem) => problem.id === Number(id),
+  )?.sanitize;
+
   const mutation = useMutation({
-    mutationFn: async (user_solution: string) => {
+    mutationFn: async (user_solution: string): Promise<SubmissionResponse> => {
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -36,33 +34,42 @@ export default function SolutionBox({
 
       const data: SubmissionResponse = await response.json();
 
-      if (data.type === RESPONSE_TYPE.WARNING) {
-        throw { type: RESPONSE_TYPE.WARNING, message: data.value };
-      }
-
-      if (data.type === RESPONSE_TYPE.ERROR) {
-        throw new Error(data.value);
-      }
-
-      if (data.type === RESPONSE_TYPE.SUCCESS) {
-        return data;
-      }
-
-      if (!response.ok) {
-        throw new Error("Failed to submit solution");
+      if (
+        data.type === RESPONSE_TYPE.ERROR ||
+        data.type === RESPONSE_TYPE.WARNING
+      ) {
+        throw data;
       }
 
       return data;
     },
   });
 
+  function handleMutationResponse(response: SubmissionResponse) {
+    switch (response.type) {
+      case RESPONSE_TYPE.SUCCESS:
+        toast.success(`Uspjeh, vaš rezultat: ${response.value}`);
+        break;
+      case RESPONSE_TYPE.ERROR:
+        toast.error(response.value);
+        break;
+      case RESPONSE_TYPE.WARNING:
+        toast.warning(response.value);
+        break;
+    }
+  }
+
   async function handleSubmit(formData: FormData) {
     const solution = formData.get("solution") as string;
 
-    const sanitizeResult = sanitize(solution);
-
-    if (sanitizeResult.type === RESPONSE_TYPE.ERROR) {
-      toast.error(sanitizeResult.value);
+    if (sanitize) {
+      const sanitizeResult = sanitize(solution);
+      if (sanitizeResult.type === RESPONSE_TYPE.ERROR) {
+        toast.error(sanitizeResult.value);
+        return;
+      }
+    } else {
+      toast.error("Nije moguće pronaći konfiguraciju za ovaj zadatak.");
       return;
     }
 
@@ -70,11 +77,8 @@ export default function SolutionBox({
 
     try {
       const result = await mutation.mutateAsync(solution);
-
-      if (result.type === RESPONSE_TYPE.SUCCESS) {
-        toast.dismiss(loadingToast);
-        toast.success(`Uspjeh, vaš rezultat: ${result.value}`);
-      }
+      toast.dismiss(loadingToast);
+      handleMutationResponse(result);
     } catch (error: unknown) {
       toast.dismiss(loadingToast);
 
@@ -82,13 +86,9 @@ export default function SolutionBox({
         error &&
         typeof error === "object" &&
         "type" in error &&
-        error.type === RESPONSE_TYPE.WARNING
+        "value" in error
       ) {
-        const warningMessage =
-          typeof error === "object" && "message" in error
-            ? String(error.message)
-            : "Too many submissions. Please wait a bit";
-        toast.warning(warningMessage);
+        handleMutationResponse(error as SubmissionResponse);
       } else {
         toast.error(
           error instanceof Error
