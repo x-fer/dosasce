@@ -14,9 +14,8 @@ export default function SolutionBox() {
   const { year, id } = getProblemYearAndId(pathname, "problem");
 
   const yearConfig = getConfig(year);
-  const sanitize = yearConfig?.problems.find(
-    (problem) => problem.id === Number(id),
-  )?.sanitize;
+  const problem = yearConfig?.problems.find((p) => p.id === Number(id));
+  const sanitize = problem?.sanitize;
 
   const mutation = useMutation({
     mutationFn: async (user_solution: string): Promise<SubmissionResponse> => {
@@ -62,20 +61,17 @@ export default function SolutionBox() {
   async function handleSubmit(formData: FormData) {
     const solution = formData.get("solution") as string;
 
-    if (sanitize) {
-      const sanitizeResult = sanitize(solution);
-      if (sanitizeResult.type === RESPONSE_TYPE.ERROR) {
-        toast.error(sanitizeResult.value);
-        return;
-      }
-    } else {
-      toast.error("Nije moguće pronaći konfiguraciju za ovaj zadatak.");
-      return;
-    }
-
     const loadingToast = toast.loading("Rješenje se šalje...");
 
     try {
+      if (typeof sanitize === "function") {
+        const sanitizeResult = sanitize(solution);
+        if (sanitizeResult.type === RESPONSE_TYPE.ERROR) {
+          toast.error(sanitizeResult.value);
+          return;
+        }
+      }
+
       const result = await mutation.mutateAsync(solution);
       toast.dismiss(loadingToast);
       handleMutationResponse(result);
