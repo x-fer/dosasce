@@ -1,6 +1,4 @@
-import json
 import sys
-from typing import Literal, Dict
 
 
 def hamming_distance(str1, str2):
@@ -32,21 +30,11 @@ def sanitize(input_string):
         raise Exception("Input string contains invalid characters.")
 
 
-Type = Literal["success", "warning", "error"]
-Response = Dict[str, str]
-
-
-def response(response_type: Type, value: str) -> Response:
-    print(json.dumps({"type": response_type, "value": str(value)}))
-
-
 with open("input.txt", "r") as f:
     problem_input = f.readlines()
 
-try:
-    user_solution = sys.argv[1]
-    sanitize(user_solution)
-    total_score = calculate(user_solution, problem_input)
-    response("success", total_score)
-except Exception as error_message:
-    response("error", error_message)
+
+user_solution = sys.argv[1]
+sanitize(user_solution)
+total_score = calculate(user_solution, problem_input)
+print(total_score)
