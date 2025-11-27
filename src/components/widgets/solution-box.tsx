@@ -29,31 +29,64 @@ export default function SolutionBox({
         }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to submit solution");
+      const data = await response.json();
+
+      if (data.type === "warning") {
+        throw { type: "warning", message: data.value };
       }
 
-      return await response.json();
-    },
-    onSuccess: () => {
-      toast.success("Rješenje uspješno poslano!");
-    },
-    onError: (error) => {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Došlo je do greške pri slanju rješenja. Molimo pokušajte ponovno.",
-      );
+      if (data.type === "error") {
+        throw new Error(data.value);
+      }
+
+      if (data.type === "success") {
+        return data;
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || data.value || "Failed to submit solution",
+        );
+      }
+
+      return data;
     },
   });
 
   async function handleSubmit(formData: FormData) {
     const solution = formData.get("solution") as string;
 
-    toast.promise(mutation.mutateAsync(solution), {
-      loading: "Rješenje se šalje...",
-    });
+    const loadingToast = toast.loading("Rješenje se šalje...");
+
+    try {
+      const result = await mutation.mutateAsync(solution);
+
+      if (result.type === "success") {
+        toast.dismiss(loadingToast);
+        toast.success("Rješenje uspješno poslano!");
+      }
+    } catch (error: unknown) {
+      toast.dismiss(loadingToast);
+
+      if (
+        error &&
+        typeof error === "object" &&
+        "type" in error &&
+        error.type === "warning"
+      ) {
+        const warningMessage =
+          typeof error === "object" && "message" in error
+            ? String(error.message)
+            : "Too many submissions. Please wait a bit";
+        toast.warning(warningMessage);
+      } else {
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : "Došlo je do greške pri slanju rješenja. Molimo pokušajte ponovno.",
+        );
+      }
+    }
   }
 
   return (
