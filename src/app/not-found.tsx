@@ -1,8 +1,10 @@
 import { Anchor } from "@/components/ui/anchor";
 
+export const dynamic = "force-static";
+
 export default function NotFound() {
   return (
-    <main className="flex h-screen w-screen flex-col pt-25 pb-10">
+    <main className="flex min-h-screen w-full flex-col overflow-x-hidden pt-25 pb-10">
       <section className="border-dosasce-light-red bg-dosasce-white mx-auto flex h-full w-full max-w-5xl grow flex-col items-center justify-center rounded-lg border-2 border-solid p-4 py-10 text-center sm:px-0 md:p-10 md:px-16 lg:px-32">
         <p className="text-dosasce-red font-mono text-xl font-semibold">404</p>
         <h1 className="text-dosasce-black mt-4 font-serif text-3xl font-bold tracking-tight sm:text-5xl">
