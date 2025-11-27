@@ -74,6 +74,28 @@ const faq: AccordionItem[] = [
     content:
       "Naravno! Natjecanje se u potpunosti održava online. Dodjela je uživo u Zagrebu, ali ako osvojiš neku od nagrada, a ne možeš doći, oko preuzimanja ćemo se dogovoriti naknadno.",
   },
+  {
+    title: "Imam ideju za zadatak / Htio bih pomoći u organizaciji natjecanja",
+    content: (
+      <>
+        Uvijek volimo entuzijazam. Ako imaš ideju za zadatak, molim te pogledaj
+        upute{" "}
+        <Anchor
+          href="/how-to-create-a-dosasce-problem"
+          className="text-dosasce-red underline hover:opacity-60"
+        >
+          ovdje
+        </Anchor>
+        . Ako želiš pomoći u organizaciji natjecanja, slobodno nam se obrati na
+        email <Anchor href="mailto:dosasce@xfer.hr">dosasce@xfer.hr</Anchor>.
+        Izvorni kod za dosasce++ također možeš pronaći na GitHubu:{" "}
+        <Anchor href="https://github.com/x-fer/dosasce">
+          github.com/x-fer/dosasce
+        </Anchor>
+        .
+      </>
+    ),
+  },
 ];
 
 export default function FAQ() {

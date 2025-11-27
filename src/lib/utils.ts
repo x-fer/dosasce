@@ -12,6 +12,7 @@ export function formatDateHR(date: Date): string {
   return date.toLocaleDateString("hr", {
     day: "numeric",
     month: "numeric",
+    year: "numeric",
   });
 }
 
@@ -22,5 +23,6 @@ export function formatDateEN(date: Date): string {
   return date.toLocaleDateString("en-US", {
     day: "numeric",
     month: "numeric",
+    year: "numeric",
   });
 }
