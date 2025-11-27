@@ -63,7 +63,7 @@ export default function SolutionBox({
 
       if (result.type === "success") {
         toast.dismiss(loadingToast);
-        toast.success("Rješenje uspješno poslano!");
+        toast.success(`Uspjeh, vaš rezultat: ${result.value}`);
       }
     } catch (error: unknown) {
       toast.dismiss(loadingToast);
@@ -101,13 +101,6 @@ export default function SolutionBox({
         placeholder="Unesite vaše rješenje ovdje..."
         className="focus:border-dosasce-red focus:ring-dosasce-red/20 min-h-[200px] w-full resize-none rounded border border-gray-300 p-4 font-mono text-sm focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
       />
-      {mutation.error && (
-        <p className="mt-2 text-sm text-red-600">
-          {mutation.error instanceof Error
-            ? mutation.error.message
-            : "Došlo je do greške pri slanju rješenja."}
-        </p>
-      )}
       <div className={"mt-4 flex items-center justify-between"}>
         {year && id && (
           <Anchor
