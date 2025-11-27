@@ -317,7 +317,7 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
                   <span>Prijavi se</span>
                 </button>
               ) : (
-                <div className="space-y-1 md:space-y-1.5">
+                <div className="flex justify-between space-y-1 md:space-y-1.5">
                   <div className="flex items-center gap-2 px-3 py-1 md:gap-3 md:px-4 md:py-1.5">
                     {user.user_metadata?.avatar_url ? (
                       <img
