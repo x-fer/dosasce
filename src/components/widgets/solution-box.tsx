@@ -16,9 +16,25 @@ export default function SolutionBox({
   const { year, id } = getProblemYearAndId(pathname, "problem");
 
   const mutation = useMutation({
-    mutationFn: async (_: string) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return { success: true };
+    mutationFn: async (user_solution: string) => {
+      const response = await fetch("/api/judge", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_solution,
+          year_id: year,
+          problem_id: id,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to submit solution");
+      }
+
+      return await response.json();
     },
     onSuccess: () => {
       toast.success("Rješenje uspješno poslano!");
@@ -59,7 +75,7 @@ export default function SolutionBox({
             : "Došlo je do greške pri slanju rješenja."}
         </p>
       )}
-      <div className={"mt-4 flex items-center justify-end"}>
+      <div className={"mt-4 flex items-center justify-between"}>
         {year && id && (
           <Anchor
             href={`/leaderboard/${year}/${id}`}
