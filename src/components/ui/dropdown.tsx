@@ -22,7 +22,7 @@ type LinkItem = {
 };
 
 type HeaderDropdownProps = {
-  tasks: LinkItem[];
+  problems: LinkItem[];
   leaderboards: LinkItem[];
 };
 
@@ -180,7 +180,10 @@ export function DropdownTrigger({
   );
 }
 
-export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
+export function HeaderDropdown({
+  problems,
+  leaderboards,
+}: HeaderDropdownProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, isLoading, login, logout } = useAuth();
@@ -250,19 +253,17 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
               </h3>
             </div>
             <div className="space-y-0.5">
-              {tasks
-                .filter((task) => task.id !== 8)
-                .map((task) => (
-                  <Anchor
-                    key={task.id}
-                    href={task.href}
-                    onClick={close}
-                    styled={false}
-                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
-                  >
-                    {task.title}
-                  </Anchor>
-                ))}
+              {problems.map((task) => (
+                <Anchor
+                  key={task.id}
+                  href={task.href}
+                  onClick={close}
+                  styled={false}
+                  className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
+                >
+                  {task.title}
+                </Anchor>
+              ))}
             </div>
           </div>
 
@@ -278,19 +279,17 @@ export function HeaderDropdown({ tasks, leaderboards }: HeaderDropdownProps) {
               </h3>
             </div>
             <div className="space-y-0.5">
-              {leaderboards
-                .filter((leaderboard) => leaderboard.id !== 8)
-                .map((leaderboard) => (
-                  <Anchor
-                    key={leaderboard.id}
-                    href={leaderboard.href}
-                    onClick={close}
-                    styled={false}
-                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
-                  >
-                    {leaderboard.title}
-                  </Anchor>
-                ))}
+              {leaderboards.map((leaderboard) => (
+                <Anchor
+                  key={leaderboard.id}
+                  href={leaderboard.href}
+                  onClick={close}
+                  styled={false}
+                  className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
+                >
+                  {leaderboard.title}
+                </Anchor>
+              ))}
             </div>
           </div>
 
