@@ -54,6 +54,9 @@ export default function SolutionBox() {
   async function handleSubmit(formData: FormData) {
     const solution = formData.get("solution") as string;
 
+    // Dismiss all prior toasts when submitting again
+    toast.dismiss();
+
     const loadingToast = toast.loading("Rješenje se šalje...");
 
     try {
