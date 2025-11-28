@@ -131,6 +131,9 @@ export async function POST(request: Request) {
       );
     }
 
+    console.log("yearData", yearData);
+    console.log("problemData", problemData);
+
     const problem_id = problemData.id;
 
     const backendUrl = `${process.env.BACKEND_URL}/submit`;
