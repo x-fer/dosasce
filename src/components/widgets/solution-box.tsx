@@ -17,6 +17,9 @@ export default function SolutionBox() {
   const problem = yearConfig?.problems.find((p) => p.id === Number(id));
   const sanitize = problem?.sanitize;
 
+  console.log("Problem:", problem);
+  console.log("Sanitize:", sanitize);
+
   const mutation = useMutation({
     mutationFn: async (user_solution: string): Promise<SubmissionResponse> => {
       const response = await fetch("/api/submit", {
@@ -31,20 +34,13 @@ export default function SolutionBox() {
         }),
       });
 
-      const data: SubmissionResponse = await response.json();
+      const responseData: SubmissionResponse = await response.json();
 
-      if (
-        data.type === RESPONSE_TYPE.ERROR ||
-        data.type === RESPONSE_TYPE.WARNING
-      ) {
-        throw data;
-      }
-
-      return data;
+      return responseData;
     },
   });
 
-  function handleMutationResponse(response: SubmissionResponse) {
+  function handleResponse(response: SubmissionResponse) {
     switch (response.type) {
       case RESPONSE_TYPE.SUCCESS:
         toast.success(`Uspjeh, vaš rezultat: ${response.value}`);
@@ -74,23 +70,25 @@ export default function SolutionBox() {
 
       const result = await mutation.mutateAsync(solution);
       toast.dismiss(loadingToast);
-      handleMutationResponse(result);
-    } catch (error: unknown) {
+      handleResponse(result);
+    } catch (error) {
       toast.dismiss(loadingToast);
-
       if (
         error &&
         typeof error === "object" &&
         "type" in error &&
         "value" in error
       ) {
-        handleMutationResponse(error as SubmissionResponse);
+        handleResponse(error as SubmissionResponse);
       } else {
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : "Došlo je do greške pri slanju rješenja. Molimo pokušajte ponovno.",
-        );
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        handleResponse({
+          type: RESPONSE_TYPE.ERROR,
+          value:
+            errorMessage ||
+            "Došlo je do greške pri slanju rješenja. Molimo pokušajte ponovno.",
+        });
       }
     }
   }
