@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { RESPONSE_TYPE } from "@/lib/types";
+import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
 
 export const runtime = "edge";
 
@@ -125,7 +125,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await backendResponse.json();
+    const result: SubmissionResponse = await backendResponse.json();
 
     if (result.type && result.value) {
       return NextResponse.json(result);

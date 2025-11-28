@@ -11,8 +11,9 @@ export interface SubmissionResponse {
   type: SubmissionResponseType;
   value: string;
   timestamp?: string;
+  submission_id?: string;
 }
 
 export type SanitizeFunction = (
   input: string,
-) => Omit<SubmissionResponse, "timestamp">;
+) => Omit<SubmissionResponse, "timestamp" | "submission_id">;
