@@ -3,11 +3,10 @@ import { createAdminServer } from "@/lib/supabase/server";
 
 export const runtime = "edge";
 
-export async function GET({
-  params,
-}: {
-  params: Promise<{ year: string; problem: string }>;
-}) {
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ year: string; problem: string }> },
+) {
   try {
     const { year, problem } = await params;
     const year_num = parseInt(year);

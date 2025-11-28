@@ -1,4 +1,6 @@
 import { useAuthServer } from "@/features/auth/useAuthServer";
+import { getProblemYearAndId } from "@/lib/problem";
+import { usePathname } from "next/navigation";
 
 interface LeaderboardEntry {
   user_id: string;
@@ -9,7 +11,13 @@ interface LeaderboardEntry {
 }
 
 async function getLeaderboard(): Promise<LeaderboardEntry[]> {
-  const response = await fetch("/api/leaderboard/2025/8", {
+  const pathname = usePathname();
+  const { year_num, problem_num } = getProblemYearAndId(
+    pathname,
+    "leaderboard",
+  );
+
+  const response = await fetch(`/api/leaderboard/${year_num}/${problem_num}`, {
     next: { revalidate: 60 },
   });
 
