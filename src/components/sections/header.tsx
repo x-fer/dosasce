@@ -6,19 +6,19 @@ export default function Header() {
   const config = getConfig(2025);
 
   const problems = config.problems
-    .filter((problem) => problem.id !== 8)
+    .filter((problem) => problem.problem_num !== 8)
     .map((problem) => ({
-      id: problem.id,
-      title: "Zadatak " + problem.id,
-      href: `/problem/${config.year}/${problem.id}`,
+      id: problem.problem_num,
+      title: "Zadatak " + problem.problem_num,
+      href: `/problem/${config.year}/${problem.problem_num}`,
     }));
 
   const leaderboards = config.problems
-    .filter((problem) => problem.id !== 8)
+    .filter((problem) => problem.problem_num !== 8)
     .map((problem) => ({
-      id: problem.id,
-      title: "Zadatak " + problem.id,
-      href: `/leaderboard/${config.year}/${problem.id}`,
+      id: problem.problem_num,
+      title: "Zadatak " + problem.problem_num,
+      href: `/leaderboard/${config.year}/${problem.problem_num}`,
     }));
 
   return (
