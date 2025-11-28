@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createServer } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export const runtime = "edge";
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const origin = requestUrl.origin;
 
   if (code) {
-    const supabase = await createClient();
+    const supabase = await createServer();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createServer, createAdminServer } from "@/lib/supabase/server";
 import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
 import { isNumber } from "util";
 
@@ -46,7 +46,9 @@ function checkRateLimit(userId: string): {
 
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = await createServer();
+    const supabaseAdmin = await createAdminServer();
+
     const {
       data: { session },
       error: sessionError,
@@ -95,8 +97,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Look up the year_id and problem_id from the database
-    const { data: yearData, error: yearError } = await supabase
+    const { data: yearData, error: yearError } = await supabaseAdmin
       .from("years")
       .select("id")
       .eq("year_num", year_num)
@@ -113,7 +114,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data: problemData, error: problemError } = await supabase
+    const { data: problemData, error: problemError } = await supabaseAdmin
       .from("problems")
       .select("id")
       .eq("year_id", yearData.id)
@@ -176,7 +177,7 @@ export async function POST(request: Request) {
       result.submission_id
     ) {
       try {
-        const { error: insertError } = await supabase
+        const { error: insertError } = await supabaseAdmin
           .from("submissions")
           .insert({
             user_id: user.id,
