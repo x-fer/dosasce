@@ -47,11 +47,11 @@ export async function POST(request: Request) {
   try {
     const supabase = await createClient();
     const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
 
-    if (authError || !user) {
+    if (sessionError || !session?.user) {
       return NextResponse.json(
         {
           type: RESPONSE_TYPE.ERROR,
@@ -60,6 +60,9 @@ export async function POST(request: Request) {
         { status: 401 },
       );
     }
+
+    const user = session.user;
+    const supabaseToken = session.access_token;
 
     const rateLimitCheck = checkRateLimit(user.id);
     if (!rateLimitCheck.allowed) {
@@ -101,6 +104,7 @@ export async function POST(request: Request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${supabaseToken}`,
       },
       body: JSON.stringify({
         user_solution,
