@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           type: RESPONSE_TYPE.ERROR,
-          value: `No year ${year_num} defined for this problem, error: ${yearError}, yearData: ${yearData}`,
+          value: `No year ${year_num} defined for this problem`,
         },
         { status: 404 },
       );
@@ -125,7 +125,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           type: RESPONSE_TYPE.ERROR,
-          value: `No problem ${problem_num} defined for year ${year_num}, error: ${problemError}, problemData: ${problemData}`,
+          value: `No problem ${problem_num} defined for year ${year_num}.}`,
         },
         { status: 404 },
       );
