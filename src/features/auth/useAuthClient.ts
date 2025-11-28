@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SupabaseUser = any;
 
-export function useAuth() {
+export function useAuthClient() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();

@@ -11,7 +11,7 @@ import {
 
 import { Trophy, Code, LogIn, User, Menu, X } from "lucide-react";
 import Separator from "@/components/ui/separator";
-import { useAuth } from "@/features/auth/useAuth";
+import { useAuthClient } from "@/features/auth/useAuthClient";
 import { Anchor } from "./anchor";
 import Button from "./button";
 
@@ -186,7 +186,7 @@ export function HeaderDropdown({
 }: HeaderDropdownProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { user, isLoading, login, logout } = useAuth();
+  const { user, isLoading, login, logout } = useAuthClient();
 
   const close = () => setDropdownOpen(false);
 
