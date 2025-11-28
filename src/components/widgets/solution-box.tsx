@@ -17,9 +17,6 @@ export default function SolutionBox() {
   const problem = yearConfig?.problems.find((p) => p.id === Number(id));
   const sanitize = problem?.sanitize;
 
-  console.log("Problem:", problem);
-  console.log("Sanitize:", sanitize);
-
   const mutation = useMutation({
     mutationFn: async (user_solution: string): Promise<SubmissionResponse> => {
       const response = await fetch("/api/submit", {
@@ -63,6 +60,7 @@ export default function SolutionBox() {
       if (typeof sanitize === "function") {
         const sanitizeResult = sanitize(solution);
         if (sanitizeResult.type === RESPONSE_TYPE.ERROR) {
+          toast.dismiss(loadingToast);
           toast.error(sanitizeResult.value);
           return;
         }
