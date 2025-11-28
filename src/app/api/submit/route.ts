@@ -50,11 +50,11 @@ export async function POST(request: Request) {
     const supabaseAdmin = createAdminServer();
 
     const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession();
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
 
-    if (sessionError || !session?.user) {
+    if (userError || !user) {
       return NextResponse.json(
         {
           type: RESPONSE_TYPE.ERROR,
@@ -64,8 +64,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = session.user;
-    const supabaseToken = session.access_token;
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const supabaseToken = session?.access_token;
 
     const rateLimitCheck = checkRateLimit(user.id);
     if (!rateLimitCheck.allowed) {
@@ -132,9 +134,6 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log("yearData", yearData);
-    console.log("problemData", problemData);
-
     const problem_id = problemData.id;
 
     const backendUrl = `${process.env.BACKEND_URL}/submit`;
@@ -151,8 +150,8 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         user_solution,
-        year_num,
-        problem_num,
+        year_num: String(year_num),
+        problem_num: String(problem_num),
       }),
     });
 
