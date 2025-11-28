@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
+import { isNumber } from "util";
 
 export const runtime = "edge";
 
@@ -75,7 +76,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { user_solution, year_id, problem_id } = await request.json();
+    const { user_solution, year_num, problem_num } = await request.json();
 
     if (!user_solution) {
       return NextResponse.json(
@@ -84,15 +85,53 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!year_id || !problem_id) {
+    if (!year_num || !problem_num) {
       return NextResponse.json(
         {
           type: RESPONSE_TYPE.ERROR,
-          value: "Year ID and Problem ID are required",
+          value: "Year number and Problem number are required",
         },
         { status: 400 },
       );
     }
+
+    // Look up the year_id and problem_id from the database
+    const { data: yearData, error: yearError } = await supabase
+      .from("years")
+      .select("id")
+      .eq("year_num", year_num)
+      .single();
+
+    if (yearError || !yearData) {
+      console.error("Error finding year:", yearError);
+      return NextResponse.json(
+        {
+          type: RESPONSE_TYPE.ERROR,
+          value: `No year ${year_num} defined for this problem`,
+        },
+        { status: 404 },
+      );
+    }
+
+    const { data: problemData, error: problemError } = await supabase
+      .from("problems")
+      .select("id")
+      .eq("year_id", yearData.id)
+      .eq("problem_num", problem_num)
+      .single();
+
+    if (problemError || !problemData) {
+      console.error("Error finding problem:", problemError);
+      return NextResponse.json(
+        {
+          type: RESPONSE_TYPE.ERROR,
+          value: `No problem ${problem_num} defined for year ${year_num}`,
+        },
+        { status: 404 },
+      );
+    }
+
+    const problem_id = problemData.id;
 
     const backendUrl = `${process.env.BACKEND_URL}/submit`;
 
@@ -108,8 +147,8 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         user_solution,
-        year_id,
-        problem_id,
+        year_num,
+        problem_num,
       }),
     });
 
@@ -127,8 +166,38 @@ export async function POST(request: Request) {
 
     const result: SubmissionResponse = await backendResponse.json();
 
+    if (
+      RESPONSE_TYPE.SUCCESS === result.type &&
+      isNumber(result.value) &&
+      !isNaN(result.value) &&
+      result.submission_id
+    ) {
+      try {
+        const { error: insertError } = await supabase
+          .from("submissions")
+          .insert({
+            user_id: user.id,
+            problem_id: problem_id,
+            judge0_submission_id: result.submission_id,
+            score: result.value,
+            submitted_at: result.timestamp,
+          });
+
+        if (insertError) {
+          console.error("Database insertion error:", insertError);
+        }
+      } catch (dbError) {
+        console.error("Database error:", dbError);
+      }
+    }
+
+    // Remove timestamp and submission_id from the response before returning it
     if (result.type && result.value) {
-      return NextResponse.json(result);
+      const clientResponse: Partial<SubmissionResponse> = {
+        type: result.type,
+        value: result.value,
+      };
+      return NextResponse.json(clientResponse);
     }
 
     return NextResponse.json({
