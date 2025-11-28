@@ -130,10 +130,10 @@ export default function Timeline() {
       {yearConfig.problems.map((problem, index) => {
         return (
           <TimelineCard
-            key={problem.id}
-            name={"Zadatak " + problem.id}
+            key={problem.problem_num}
+            name={"Zadatak " + problem.problem_num}
             startDate={problem.startDate}
-            endDate={yearConfig.endTime}
+            endDate={problem.endTime}
             image={timelineImages[index]}
             left={index % 2 === 0}
           />

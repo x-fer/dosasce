@@ -2,14 +2,14 @@ import { RESPONSE_TYPE, type SanitizeFunction } from "@/lib/types";
 
 type YearConfig = {
   year: number;
-  endTime: Date;
   awards: {
     date: Date;
     location: string;
   };
   problems: Array<{
-    id: number;
+    problem_num: number;
     startDate: Date;
+    endTime: Date;
     sanitize?: SanitizeFunction;
   }>;
 };
@@ -17,27 +17,30 @@ type YearConfig = {
 export const config = {
   2025: {
     year: 2025,
-    endTime: new Date(2025, 11, 19, 23, 59), // 19.12.2025. 23:59 Croatian time
     awards: {
       date: new Date(2025, 11, 20, 18, 0), // 20.12.2025. 18:00 Croatian time
       location: "FER, Unska 3, 18:00",
     },
     problems: [
       {
-        id: 1,
+        problem_num: 1,
         startDate: new Date(2025, 11, 1, 0, 0), // 1.12.2025. 00:00 Croatian time
+        endTime: new Date(2025, 11, 19, 23, 59), // 19.12.2025. 23:59 Croatian time
       },
       {
-        id: 2,
+        problem_num: 2,
         startDate: new Date(2025, 11, 6, 0, 0), // 6.12.2025. 00:00 Croatian time
+        endTime: new Date(2025, 11, 19, 23, 59), // 19.12.2025. 23:59 Croatian time
       },
       {
-        id: 3,
+        problem_num: 3,
         startDate: new Date(2025, 11, 13, 0, 0), // 13.12.2025. 00:00 Croatian time
+        endTime: new Date(2025, 11, 19, 23, 59), // 19.12.2025. 23:59 Croatian time
       },
       {
-        id: 8,
-        startDate: new Date(2025, 11, 20, 0, 0), // 20.12.2025. 00:00 Croatian time
+        problem_num: 8,
+        startDate: new Date(2025, 10, 26, 0, 0), // 26.11.2025. 00:00 Croatian time
+        endTime: new Date(2025, 10, 30, 23, 59), // 30.11.2025. 23:59 Croatian time
         sanitize: (input: string) => {
           const trimmed = input.trim();
           if (trimmed.length !== 100) {

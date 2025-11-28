@@ -6,9 +6,9 @@ export function getProblemYearAndId(
 
   if (!match || !match[1] || !match[2]) {
     throw new Error(
-      `Invalid pathname format: expected /${page}/year/id, got ${pathname}`,
+      `Invalid pathname format: expected /${page}/year_num/problem_num, got ${pathname}`,
     );
   }
 
-  return { year: match[1], id: match[2] };
+  return { year_num: match[1], problem_num: match[2] };
 }

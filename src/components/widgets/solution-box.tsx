@@ -11,10 +11,12 @@ import { getConfig } from "@/lib/config";
 
 export default function SolutionBox() {
   const pathname = usePathname();
-  const { year, id } = getProblemYearAndId(pathname, "problem");
+  const { year_num, problem_num } = getProblemYearAndId(pathname, "problem");
 
-  const yearConfig = getConfig(year);
-  const problem = yearConfig?.problems.find((p) => p.id === Number(id));
+  const yearConfig = getConfig(year_num);
+  const problem = yearConfig?.problems.find(
+    (p) => p.problem_num === Number(problem_num),
+  );
   const sanitize = problem?.sanitize;
 
   const mutation = useMutation({
@@ -26,8 +28,8 @@ export default function SolutionBox() {
         },
         body: JSON.stringify({
           user_solution,
-          year_id: year,
-          problem_id: id,
+          problem_num,
+          year_num,
         }),
       });
 
@@ -107,9 +109,9 @@ export default function SolutionBox() {
         className="focus:border-dosasce-red focus:ring-dosasce-red/20 min-h-[200px] w-full resize-none rounded border border-gray-300 p-4 font-mono text-sm focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
       />
       <div className={"mt-4 flex items-center justify-between"}>
-        {year && id && (
+        {year_num && problem_num && (
           <Anchor
-            href={`/leaderboard/${year}/${id}`}
+            href={`/leaderboard/${year_num}/${problem_num}`}
             styled={false}
             className="text-dosasce-red hover:text-dosasce-red/80 transition-colors"
           >
