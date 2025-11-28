@@ -47,7 +47,7 @@ function checkRateLimit(userId: string): {
 export async function POST(request: Request) {
   try {
     const supabase = await createServer();
-    const supabaseAdmin = await createAdminServer();
+    const supabaseAdmin = createAdminServer();
 
     const {
       data: { session },
