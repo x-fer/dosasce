@@ -168,10 +168,11 @@ export async function POST(request: Request) {
 
     const result: SubmissionResponse = await backendResponse.json();
 
+    const scoreValue = parseFloat(result.value);
+
     if (
       RESPONSE_TYPE.SUCCESS === result.type &&
-      typeof result.value === "number" &&
-      !isNaN(result.value) &&
+      !isNaN(scoreValue) &&
       result.submission_id
     ) {
       try {
@@ -181,7 +182,7 @@ export async function POST(request: Request) {
             user_id: user.id,
             problem_id: problem_id,
             judge0_submission_id: result.submission_id,
-            score: result.value,
+            score: scoreValue,
             submitted_at: result.timestamp,
           });
 
