@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { createServer, createAdminServer } from "@/lib/supabase/server";
 import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
-import { isNumber } from "util";
 
 export const runtime = "edge";
 
@@ -171,7 +170,7 @@ export async function POST(request: Request) {
 
     if (
       RESPONSE_TYPE.SUCCESS === result.type &&
-      isNumber(result.value) &&
+      typeof result.value === "number" &&
       !isNaN(result.value) &&
       result.submission_id
     ) {
