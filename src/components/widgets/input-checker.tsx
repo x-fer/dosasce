@@ -11,9 +11,7 @@ export default function InputChecker({
   return (
     <div className="flex w-full gap-4">
       <Anchor href={inputFileUrl} styled={false} className="w-1/2">
-        <Button variant="default" className="w-full">
-          Ulazni podatci
-        </Button>
+        <Button className="w-full">Ulazni podatci</Button>
       </Anchor>
       <Anchor href={checkerFileUrl} styled={false} className="w-1/2">
         <Button variant="primary" className="w-full">

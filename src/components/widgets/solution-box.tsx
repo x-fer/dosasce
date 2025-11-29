@@ -123,7 +123,6 @@ export default function SolutionBox() {
         )}
         <Button
           type="submit"
-          variant="default"
           loading={mutation.isPending}
           disabled={mutation.isPending}
         >
