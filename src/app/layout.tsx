@@ -33,13 +33,16 @@ export default function RootLayout({
           "font-sans antialiased",
           albertSans.variable,
           firaCode.variable,
+          "flex min-h-screen flex-col",
         )}
       >
         <MovingIconBackground />
 
         <QueryProvider>
           <Header />
-          {children}
+          <main className="flex h-full grow flex-col overflow-x-hidden overscroll-contain">
+            {children}
+          </main>
           <Footer />
           <Toaster />
         </QueryProvider>
