@@ -4,6 +4,7 @@ SELECT DISTINCT ON (s.user_id, p.year_id, p.problem_num)
     s.user_id,
     u.raw_user_meta_data->>'full_name' AS full_name,
     u.raw_user_meta_data->>'avatar_url' AS avatar_url,
+    u.raw_user_meta_data->>'user_category' AS user_category,
     y.year_num,
     p.problem_num,
     s.judge0_submission_id,

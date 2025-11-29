@@ -44,7 +44,9 @@ export async function GET(
 
     const { data, error } = await supabaseAdmin
       .from("leaderboard")
-      .select("user_id, full_name, avatar_url, score, submitted_at")
+      .select(
+        "user_id, full_name, avatar_url, user_category, score, submitted_at",
+      )
       .eq("year_num", year_num)
       .eq("problem_num", problem_num)
       .order("score", { ascending: false })

@@ -4,6 +4,7 @@ interface LeaderboardEntry {
   user_id: string;
   full_name: string;
   avatar_url: string;
+  user_category?: string;
   score: number;
   submitted_at: string;
 }
