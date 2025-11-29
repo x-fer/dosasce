@@ -1,4 +1,4 @@
-export function getYearAndProblemNumFromPathname(
+export function getYearNumAndProblemNumFromPathname(
   pathname: string,
   page: "problem" | "leaderboard",
 ) {

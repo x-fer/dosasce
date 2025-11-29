@@ -1,59 +1,51 @@
-import { useAuthServer } from "@/features/auth/useAuthServer";
-import { createAdminServer } from "@/lib/supabase/server";
+"use client";
+
+import { useAuthClient } from "@/features/auth/useAuthClient";
+import { usePathname } from "next/navigation";
 import { notFound } from "next/navigation";
+import { getYearNumAndProblemNumFromPathname } from "@/lib/problem";
+import { useLeaderboard } from "@/features/leaderboard/useLeaderboard";
 
-export const runtime = "edge";
+export default function LeaderboardClient() {
+  const pathname = usePathname();
+  const { user } = useAuthClient();
+  const currentUserId = user?.id;
 
-interface LeaderboardEntry {
-  user_id: string;
-  full_name: string;
-  avatar_url: string;
-  score: number;
-  submitted_at: string;
-}
+  let year_num: number;
+  let problem_num: number;
 
-async function getLeaderboard(
-  year_num: number,
-  problem_num: number,
-): Promise<LeaderboardEntry[]> {
-  const supabaseAdmin = createAdminServer();
-
-  const { data, error } = await supabaseAdmin
-    .from("leaderboard")
-    .select("user_id, full_name, avatar_url, score, submitted_at")
-    .eq("year_num", year_num)
-    .eq("problem_num", problem_num)
-    .order("score", { ascending: false })
-    .order("submitted_at", { ascending: true });
-
-  if (error) {
-    console.error("Leaderboard query error:", error);
-    return [];
-  }
-
-  return data || [];
-}
-
-export default async function LeaderboardPage({
-  params,
-}: {
-  params: Promise<{ year: string; problem: string }>;
-}) {
-  const { year, problem } = await params;
-  const year_num = parseInt(year);
-  const problem_num = parseInt(problem);
-
-  if (isNaN(year_num) || isNaN(problem_num)) {
+  try {
+    const parsed = getYearNumAndProblemNumFromPathname(pathname, "leaderboard");
+    year_num = parsed.year_num;
+    problem_num = parsed.problem_num;
+  } catch {
     notFound();
   }
 
-  const leaderboard = await getLeaderboard(year_num, problem_num);
-  const { user } = await useAuthServer();
-  const currentUserId = user?.id;
+  const {
+    data: leaderboard,
+    isLoading,
+    isError,
+  } = useLeaderboard(year_num, problem_num);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto p-8 pt-[60px]">
+        <h1 className="mb-6 text-3xl font-bold">
+          Leaderboard - Year {year_num}, Problem {problem_num}
+        </h1>
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    notFound();
+  }
 
   if (!leaderboard || leaderboard.length === 0) {
     return (
-      <div className="container mx-auto p-8">
+      <div className="container mx-auto p-8 pt-[60px]">
         <h1 className="mb-6 text-3xl font-bold">
           Leaderboard - Year {year_num}, Problem {problem_num}
         </h1>
@@ -63,7 +55,7 @@ export default async function LeaderboardPage({
   }
 
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-8 pt-[60px]">
       <h1 className="mb-6 text-3xl font-bold">
         Leaderboard - Year {year_num}, Problem {problem_num}
       </h1>
