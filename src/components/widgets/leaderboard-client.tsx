@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { getYearNumAndProblemNumFromPathname } from "@/lib/problem";
 import { useLeaderboard } from "@/features/leaderboard/useLeaderboard";
 import LoadingScreen from "@/components/widgets/loading-screen";
+import { Anchor } from "@/components/ui/anchor";
 import {
   CATEGORY,
   CATEGORY_LABELS,
@@ -115,7 +116,7 @@ export default function LeaderboardClient() {
   return (
     <section className="bg-dosasce-white border-dosasce-light-red mx-auto mt-25 mb-15 w-full max-w-5xl rounded-xl px-4 py-6 md:border-2 md:px-8 md:py-10">
       <h1 className="mb-2 text-3xl font-bold">Rang lista</h1>
-      <div className="mb-8 flex flex-row items-center justify-between gap-2 text-xs sm:gap-4 sm:text-sm">
+      <div className="flex flex-row items-center justify-between gap-2 text-xs sm:gap-4 sm:text-sm">
         <div>
           <p className="text-gray-600">Godina {year_num}</p>
           <p className="text-gray-600">Zadatak: {problem_num}</p>
@@ -136,8 +137,16 @@ export default function LeaderboardClient() {
         </div>
       </div>
 
+      {/* Back to Problem Link */}
+      <Anchor
+        href={`/problem/${year_num}/${problem_num}`}
+        className="mb-4 text-xs sm:text-sm"
+      >
+        ← Vrati se na zadatak
+      </Anchor>
+
       {/* Category Filter */}
-      <div className="mb-6 flex flex-wrap gap-2">
+      <div className="mt-4 mb-6 flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
             key={category}
