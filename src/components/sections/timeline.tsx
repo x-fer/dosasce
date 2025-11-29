@@ -127,18 +127,20 @@ export default function Timeline() {
       id="timeline"
       className="bg-dosasce-white bg-snow-pattern flex w-full flex-col items-center"
     >
-      {yearConfig.problems.map((problem, index) => {
-        return (
-          <TimelineCard
-            key={problem.problem_num}
-            name={"Zadatak " + problem.problem_num}
-            startDate={problem.startDate}
-            endDate={problem.endTime}
-            image={timelineImages[index]}
-            left={index % 2 === 0}
-          />
-        );
-      })}
+      {yearConfig.problems
+        .filter((problem) => problem.problem_num !== 8)
+        .map((problem, index) => {
+          return (
+            <TimelineCard
+              key={problem.problem_num}
+              name={"Zadatak " + problem.problem_num}
+              startDate={problem.startDate}
+              endDate={problem.endTime}
+              image={timelineImages[index]}
+              left={index % 2 === 0}
+            />
+          );
+        })}
 
       <TimelineCard
         name="Dodjela"
