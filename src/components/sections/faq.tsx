@@ -43,6 +43,20 @@ const faq: AccordionItem[] = [
     ),
   },
   {
+    title: "Kako mogu odabrati kategoriju?",
+    content: (
+      <>
+        Kategoriju možeš odabrati u{" "}
+        <Anchor href="/settings">postavkama profila</Anchor>.
+      </>
+    ),
+  },
+  {
+    title: "Kako osiguravamo da se sudionici natječu u svojoj kategoriji?",
+    content:
+      "Nemamo sustav za provjeru identiteta ili statusa učenika i studenata. Tijekom dodjele nagrada očekujemo dokaz da sudionik pripada kategoriji u kojoj je sudjelovao. Ako se natječete u kategoriji koja vam ne pripada, nagradu nećete moći preuzeti.",
+  },
+  {
     title: "Tko može osvojiti nagradu?",
     content: (
       <>
@@ -52,11 +66,6 @@ const faq: AccordionItem[] = [
         mogu sudjelovati, ali ne mogu osvojiti nagradu.
       </>
     ),
-  },
-  {
-    title: "Kako osiguravamo da se sudionici natječu u svojoj kategoriji?",
-    content:
-      "Nemamo sustav za provjeru identiteta ili statusa učenika i studenata. Tijekom dodjele nagrada očekujemo dokaz da sudionik pripada kategoriji u kojoj je sudjelovao. Ako se natječete u kategoriji koja vam ne pripada, nagradu nećete moći preuzeti.",
   },
   {
     title: "Kako se prijaviti?",
