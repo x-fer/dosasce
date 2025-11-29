@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 import { getYearNumAndProblemNumFromPathname } from "@/lib/problem";
 import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
 import { getConfig } from "@/lib/config";
+import { useLeaderboard } from "@/features/leaderboard/useLeaderboard";
+import { useAuthClient } from "@/features/auth/useAuthClient";
 
 export default function SolutionBox() {
   const pathname = usePathname();
@@ -15,6 +17,14 @@ export default function SolutionBox() {
     pathname,
     "problem",
   );
+  const { user } = useAuthClient();
+  const currentUserId = user?.id;
+
+  const { data: leaderboard } = useLeaderboard(year_num, problem_num);
+  const userEntry = leaderboard?.find(
+    (entry) => entry.user_id === currentUserId,
+  );
+  const bestScore = userEntry?.score;
 
   const yearConfig = getConfig(year_num);
   const problem = yearConfig?.problems.find(
@@ -127,6 +137,11 @@ export default function SolutionBox() {
     <form action={handleSubmit}>
       <h3 className="text-dosasce-red mb-4 font-serif text-2xl font-bold">
         Vaše rješenje
+        {bestScore && (
+          <span className="ml-2 text-lg font-normal text-gray-600">
+            (Trenutno najbolje: {bestScore})
+          </span>
+        )}
       </h3>
       <textarea
         name="solution"
