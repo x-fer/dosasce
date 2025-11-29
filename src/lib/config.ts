@@ -19,7 +19,7 @@ export const config = {
     year: 2025,
     awards: {
       date: new Date(2025, 11, 20, 18, 0), // 20.12.2025. 18:00 Croatian time
-      location: "FER, Unska 3, 18:00",
+      location: "FER, Unska 3, A201, 18:00",
     },
     problems: [
       {
