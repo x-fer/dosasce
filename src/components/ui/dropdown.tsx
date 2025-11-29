@@ -9,7 +9,7 @@ import {
   useContext,
 } from "react";
 
-import { Trophy, Code, LogIn, User, Menu, X } from "lucide-react";
+import { Trophy, Code, LogIn, User, Menu, X, Settings } from "lucide-react";
 import Separator from "@/components/ui/separator";
 import { useAuthClient } from "@/features/auth/useAuthClient";
 import { Anchor } from "./anchor";
@@ -321,23 +321,34 @@ export function HeaderDropdown({
                   <span>Prijavi se</span>
                 </button>
               ) : (
-                <div className="flex items-center gap-2 space-y-1 md:space-y-1.5">
-                  <div className="flex items-center gap-2 px-3 py-1 md:gap-3 md:px-4 md:py-1.5">
-                    {user.user_metadata?.avatar_url ? (
-                      <img
-                        src={user.user_metadata.avatar_url}
-                        alt={user.user_metadata?.full_name || "User"}
-                        className="h-7 w-7 rounded-full md:h-8 md:w-8"
-                      />
-                    ) : (
-                      <User
-                        size={16}
-                        className="text-dosasce-red md:h-[18px] md:w-[18px]"
-                      />
-                    )}
-                    <span className="text-dosasce-black font-sans text-xs md:text-sm">
-                      {user.user_metadata?.full_name || "Korisnik"}
-                    </span>
+                <div className="space-y-1 md:space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 px-3 py-1 md:gap-3 md:px-4 md:py-1.5">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      {user.user_metadata?.avatar_url ? (
+                        <img
+                          src={user.user_metadata.avatar_url}
+                          alt={user.user_metadata?.full_name || "User"}
+                          className="h-5 w-5 rounded-full md:h-8 md:w-8"
+                        />
+                      ) : (
+                        <User
+                          size={14}
+                          className="text-dosasce-red md:h-[18px] md:w-[18px]"
+                        />
+                      )}
+                      <span className="text-dosasce-black font-sans text-xs md:text-sm">
+                        {user.user_metadata?.full_name || "Korisnik"}
+                      </span>
+                    </div>
+                    <Anchor
+                      href="/settings"
+                      onClick={close}
+                      styled={false}
+                      className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red flex items-center gap-2 rounded-lg px-3 py-1.5 font-sans text-sm transition-all duration-150 md:px-4 md:text-base"
+                    >
+                      <Settings size={20} className="md:h-5 md:w-5" />
+                      <span>Postavke</span>
+                    </Anchor>
                   </div>
                   <Button
                     variant="secondary"
@@ -345,7 +356,7 @@ export function HeaderDropdown({
                       logout();
                       close();
                     }}
-                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red flex-1 rounded-lg px-3 py-1 text-center font-sans text-xs transition-all duration-150 md:px-4 md:py-1.5 md:text-sm"
+                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red w-full rounded-lg px-3 py-1 text-center font-sans text-xs transition-all duration-150 md:px-4 md:py-1.5 md:text-sm"
                   >
                     Odjavi se
                   </Button>
