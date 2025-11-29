@@ -1,4 +1,4 @@
-export function getProblemYearAndId(
+export function getYearAndProblemNumFromPathname(
   pathname: string,
   page: "problem" | "leaderboard",
 ) {
@@ -10,5 +10,14 @@ export function getProblemYearAndId(
     );
   }
 
-  return { year_num: match[1], problem_num: match[2] };
+  const year_num = parseInt(match[1]);
+  const problem_num = parseInt(match[2]);
+
+  if (isNaN(year_num) || isNaN(problem_num)) {
+    throw new Error(
+      `Invalid year or problem number: expected year_num and problem_num to be numbers, got ${match[1]} and ${match[2]}`,
+    );
+  }
+
+  return { year_num, problem_num };
 }

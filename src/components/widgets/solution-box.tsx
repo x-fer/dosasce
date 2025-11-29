@@ -5,13 +5,16 @@ import { toast } from "sonner";
 import Button from "@/components/ui/button";
 import { Anchor } from "@/components/ui/anchor";
 import { usePathname } from "next/navigation";
-import { getProblemYearAndId } from "@/lib/problem";
+import { getYearAndProblemNumFromPathname } from "@/lib/problem";
 import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
 import { getConfig } from "@/lib/config";
 
 export default function SolutionBox() {
   const pathname = usePathname();
-  const { year_num, problem_num } = getProblemYearAndId(pathname, "problem");
+  const { year_num, problem_num } = getYearAndProblemNumFromPathname(
+    pathname,
+    "problem",
+  );
 
   const yearConfig = getConfig(year_num);
   const problem = yearConfig?.problems.find(
