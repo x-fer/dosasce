@@ -113,6 +113,16 @@ export default function SolutionBox() {
     }
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.shiftKey && e.key === "Enter") {
+      e.preventDefault();
+      const form = e.currentTarget.form;
+      if (form) {
+        form.requestSubmit();
+      }
+    }
+  }
+
   return (
     <form action={handleSubmit}>
       <h3 className="text-dosasce-red mb-4 font-serif text-2xl font-bold">
@@ -123,6 +133,7 @@ export default function SolutionBox() {
         required
         disabled={mutation.isPending}
         placeholder="Unesite vaše rješenje ovdje..."
+        onKeyDown={handleKeyDown}
         className="focus:border-dosasce-red focus:ring-dosasce-red/20 min-h-[200px] w-full resize-none rounded border border-gray-300 p-4 font-mono text-sm focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
       />
       <div className={"mt-4 flex items-center justify-between"}>
