@@ -12,6 +12,7 @@ import { Toaster as Sonner, type ToasterProps } from "sonner";
 const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
+      expand={true}
       theme="light"
       richColors
       className="toaster group"
