@@ -79,6 +79,10 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if user has selected a category
+    const userCategory = user.user_metadata?.user_category;
+    const requiresCategory = !userCategory;
+
     const { user_solution, year_num, problem_num } = await request.json();
 
     if (!user_solution) {
@@ -199,6 +203,7 @@ export async function POST(request: Request) {
       const clientResponse: Partial<SubmissionResponse> = {
         type: result.type,
         value: result.value,
+        requiresCategory: requiresCategory,
       };
       return NextResponse.json(clientResponse);
     }

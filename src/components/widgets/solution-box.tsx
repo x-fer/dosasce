@@ -43,6 +43,20 @@ export default function SolutionBox() {
   });
 
   function handleResponse(response: SubmissionResponse) {
+    if (response.requiresCategory) {
+      toast.warning(
+        <div className="flex flex-col gap-2">
+          <p>
+            Molim odaberite kategoriju u kojoj se natjecate. Kategoriju možete
+            odabrati u <Anchor href="/settings">postavkama</Anchor>.
+          </p>
+        </div>,
+        {
+          duration: Infinity,
+        },
+      );
+    }
+
     switch (response.type) {
       case RESPONSE_TYPE.SUCCESS:
         toast.success(`Uspjeh, vaš rezultat: ${response.value}`);

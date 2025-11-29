@@ -137,9 +137,11 @@ export default function ProfilePage() {
           Prema pravilima natjecanja, morate biti u{" "}
           <strong>točnoj kategoriji</strong> kako biste mogli osvojiti nagradu.
         </p>
-        <p className="text-yellow-800">
-          Ako niste u školi ili na fakultetu, <strong>nećete moći</strong>{" "}
-          osvojiti nagradu. Odaberite kategoriju <strong>Open</strong>.
+        <p className="mb-2 text-yellow-800">
+          Nemamo sustav za provjeru identiteta ili statusa učenika i studenata.
+          Tijekom dodjele nagrada očekujemo dokaz da sudionik pripada kategoriji
+          u kojoj je sudjelovao. Ako se natječete u kategoriji koja vam ne
+          pripada, nagradu nećete moći preuzeti.
         </p>
       </div>
 

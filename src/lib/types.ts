@@ -12,6 +12,7 @@ export interface SubmissionResponse {
   value: string;
   timestamp?: string;
   submission_id?: string;
+  requiresCategory?: boolean;
 }
 
 export type SanitizeFunction = (
