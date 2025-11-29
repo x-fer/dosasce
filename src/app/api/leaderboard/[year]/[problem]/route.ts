@@ -21,6 +21,27 @@ export async function GET(
 
     const supabaseAdmin = createAdminServer();
 
+    const { data: yearData, error: yearError } = await supabaseAdmin
+      .from("years")
+      .select("id")
+      .eq("year_num", year_num)
+      .single();
+
+    if (yearError || !yearData) {
+      return NextResponse.json({ error: "Year not found" }, { status: 404 });
+    }
+
+    const { data: problemData, error: problemError } = await supabaseAdmin
+      .from("problems")
+      .select("id")
+      .eq("year_id", yearData.id)
+      .eq("problem_num", problem_num)
+      .single();
+
+    if (problemError || !problemData) {
+      return NextResponse.json({ error: "Problem not found" }, { status: 404 });
+    }
+
     const { data, error } = await supabaseAdmin
       .from("leaderboard")
       .select("user_id, full_name, avatar_url, score, submitted_at")
@@ -37,7 +58,7 @@ export async function GET(
       );
     }
 
-    const response = NextResponse.json(data || []);
+    const response = NextResponse.json(data);
     response.headers.set(
       "Cache-Control",
       "public, s-maxage=60, stale-while-revalidate=30",
