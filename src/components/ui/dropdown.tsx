@@ -317,16 +317,19 @@ export function HeaderDropdown({
           {!isLoading && (
             <div className="border-dosasce-light-red border-t-2 pt-2 md:pt-3">
               {!user ? (
-                <button
+                <Button
+                  variant="primary"
                   onClick={() => {
                     login();
                     close();
                   }}
-                  className="border-dosasce-red text-dosasce-red hover:bg-dosasce-light-red flex w-full items-center justify-center gap-2 rounded-full border-2 px-3 py-1.5 font-sans text-xs transition-colors md:px-4 md:py-2 md:text-sm"
+                  className="w-full"
                 >
-                  <LogIn size={16} className="md:h-[18px] md:w-[18px]" />
-                  <span>Prijavi se</span>
-                </button>
+                  <div className="flex items-center gap-2">
+                    <LogIn size={16} className="md:h-[18px] md:w-[18px]" />
+                    <span>Prijavi se</span>
+                  </div>
+                </Button>
               ) : (
                 <div className="space-y-1 md:space-y-1.5">
                   <div className="flex items-center justify-between gap-2 px-3 py-1 md:gap-3 md:px-4 md:py-1.5">
