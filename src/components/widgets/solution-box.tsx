@@ -5,18 +5,17 @@ import { toast } from "sonner";
 import Button from "@/components/ui/button";
 import { Anchor } from "@/components/ui/anchor";
 import { usePathname } from "next/navigation";
-import { getYearNumAndProblemNumFromPathname } from "@/lib/problem";
+import { getYearNumAndProblemNumFromPathname } from "@/lib/utils";
 import { RESPONSE_TYPE, type SubmissionResponse } from "@/lib/types";
-import { getConfig } from "@/lib/config";
+import { getProblemConfig } from "@/config/utils";
 import { useLeaderboard } from "@/features/leaderboard/useLeaderboard";
 import { useAuthClient } from "@/features/auth/useAuthClient";
+import { getLeaderboardLink } from "@/lib/utils";
 
 export default function SolutionBox() {
   const pathname = usePathname();
-  const { year_num, problem_num } = getYearNumAndProblemNumFromPathname(
-    pathname,
-    "problems",
-  );
+  const { year_num, problem_num } =
+    getYearNumAndProblemNumFromPathname(pathname);
   const { user } = useAuthClient();
   const currentUserId = user?.id;
 
@@ -26,11 +25,8 @@ export default function SolutionBox() {
   );
   const bestScore = userEntry?.score;
 
-  const yearConfig = getConfig(year_num);
-  const problem = yearConfig?.problems.find(
-    (p) => p.problem_num === Number(problem_num),
-  );
-  const sanitize = problem?.sanitize;
+  const problem = getProblemConfig(year_num, problem_num);
+  const sanitize = problem.sanitize;
 
   const mutation = useMutation({
     mutationFn: async (user_solution: string): Promise<SubmissionResponse> => {
@@ -154,7 +150,7 @@ export default function SolutionBox() {
       <div className={"mt-4 flex items-center justify-between"}>
         {year_num && problem_num && (
           <Anchor
-            href={`/leaderboard/${year_num}/${problem_num}`}
+            href={getLeaderboardLink(year_num, problem_num)}
             styled={false}
             className="text-dosasce-red hover:text-dosasce-red/80 transition-colors"
           >

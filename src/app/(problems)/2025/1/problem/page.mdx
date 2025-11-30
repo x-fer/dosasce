@@ -1,0 +1,96 @@
+import CoverImage from "@/components/ui/cover-image";
+import InputChecker from "@/components/widgets/input-checker";
+import SolutionBox from "@/components/widgets/solution-box";
+
+<CoverImage
+  src="/problem-assets/2025/1/cover.png"
+  alt="Grupna fotografija vilenjaka"
+/>
+
+# Velika Božićna Patuljasta Fotografija
+
+Djed Božićnjak želi napraviti božićnu fotografiju za uspomenu. Slikaju se svi patuljci točnije njih 1000, posloženih u 10 redova po 100 patuljaka. Djedica je jako sentimentalan i želi sačuvati svaki dragocjeni trenutak pa je ovakva slika idealna.
+
+Patuljci su jako društveni, ali i osjetljivi. Svaki patuljak ima mišljenje o drugom patuljku. Neki se obožavaju (100), a neki se ne podnose uopće(0). Mišljenje o drugom patuljku je u biti skala [0, 100].
+
+Tvoja zadaća je posložiti patuljke u 10×100 panoramu tako da budu što sretniji sa svojim najbližim susjedima.
+
+## Ulazni podaci
+
+- 1000 redaka gdje svaki redak predstavlja mišljenja jednog patuljka o svim ostalim patuljcima
+- Svaki redak ima točno 1000 cijelih brojeva od 0 do 100, odvojenih zarezom (bez razmaka)
+- Broj na poziciji (i, j) = koliko i-ti patuljak voli j-tog patuljka
+- Dijagonala je uvijek - ( Patuljak nema mišljenje o sebi)
+- Matrica nije nužno simetrična ( i-ti patuljak može voljeti j-tog patuljka (100), ali j-ti patuljak ne voli i-tog (0))
+
+## Izlazni podaci
+
+Jedan jedini redak sa točno 1000 brojeva od 1 do 1000, odvojenih zarezom (bez razmaka i bez novog retka na kraju). Svaki patuljak može i mora se pojaviti točno jednom tj. svi brojevi 1–1000 moraju se pojaviti točno jednom. Prvih 100 brojeva u redku predstavlja prvi redak fotografije, drugih 100 brojeva predstavalja drugi redak fotografije itd.
+
+Primjer izlaza:
+542,883,121,76,997,234,567,890,12,445,378,255,901,666,123,...,999
+
+## Bodovanje
+
+Svaki patuljak gleda samo svoje orto-susjede (gore, dolje, lijevo, desno):
+
+Sreća pojedinog patuljka = zbroj voljenosti prema svim njegovim orto-susjedima
+Ukupna sreća = zbroj sreća svih 1000 patuljaka
+
+Nesreća pojedinog patuljka = najmanja sreća prema bilo kojem orto-susjedu
+Minimalna sreća = najmanja sreća bilo kojeg patuljka prema orto-susjedima na slici
+
+80 % – Ukupna sreća (80 000 bodova) <br />
+Teoretski maksimum: 378 000 (svi susjedi 100)<br />
+Teoretski minimum: 0<br />
+Bodovi = ( tvoja_sreća ) / 378 000 × 80 000
+
+-> ako se svaki patuljak mrzi sa svim susjedima → 0 bodova za ovaj dio
+
+20 % – Minimalna sreća (20 000 bodova)<br />
+Teoretski maksimum: 100 (svi susjedi 100)<br />
+Teoretski minimum: 0<br />
+Bodovi = (tvoja_minimalna_sreća) / 100 × 20 000
+
+-> ako netko ima susjeda kojeg mrzi 0 → 0 bodova za ovaj dio
+
+## Primjer
+
+Ovo je pojednostavljeni primjer sa 9 patuljaka, slika sa 3 reda po 3 patuljaka.
+
+### Ulaz
+
+```txt
+-,39,80,24,76,45,33,32,53
+0,-,73,51,67,57,41,57,43
+33,53,-,77,75,40,76,46,18
+33,55,62,-,53,41,22,37,65
+58,26,51,37,-,64,63,30,47
+50,43,48,64,87,-,57,55,29
+67,41,23,32,52,43,-,58,40
+84,67,53,29,26,23,53,-,4
+74,77,58,54,61,28,38,87,-
+```
+
+### Izlaz
+
+```txt
+5,2,6,3,1,7,8,4,9
+```
+
+Ovo u prijevodu označava:
+
+1. red: 5 2 6
+2. red: 3 1 7
+3. red: 8 4 9
+
+Sada je na tebi da za pravi problem od 1000 patuljaka pronađeš raspored u kojem su svi što sretniji!
+
+Sretno i veselo kodiranje! 🎄📸
+
+<InputChecker
+  inputFileUrl="/problem-assets/2025/1/input.txt"
+  checkerFileUrl="/problem-assets/2025/1/tester.py"
+/>
+
+<SolutionBox />

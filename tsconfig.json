@@ -25,8 +25,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@styles/*": ["./src/styles/*"],
-      "@components/*": ["./src/components/*"],
-      "@problems/*": ["./src/problems/*"]
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": [

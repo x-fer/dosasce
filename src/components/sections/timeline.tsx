@@ -1,5 +1,5 @@
-import { getConfig } from "@/lib/config";
-import { cn, formatDateHR } from "@/lib/utils";
+import { getYearConfig } from "@/config/utils";
+import { cn, formatDateHR, getProblemLink } from "@/lib/utils";
 import { Anchor } from "@/components/ui/anchor";
 
 type TimelineBoxProps = {
@@ -131,7 +131,7 @@ function TimelineCard(props: TimelineCardProps) {
 }
 
 export default function Timeline() {
-  const yearConfig = getConfig(2025);
+  const yearConfig = getYearConfig(2025);
   const now = new Date();
 
   const timelineImages = [
@@ -148,7 +148,10 @@ export default function Timeline() {
     >
       {yearConfig.problems.map((problem, index) => {
         const isOpen = now >= problem.startDate && now <= problem.endTime;
-        const problemLink = `/problems/${yearConfig.year}/${problem.problem_num}`;
+        const problemLink = getProblemLink(
+          yearConfig.year,
+          problem.problem_num,
+        );
 
         return (
           <TimelineCard

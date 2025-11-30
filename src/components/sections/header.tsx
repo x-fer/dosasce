@@ -1,9 +1,10 @@
 import { HeaderDropdown } from "@/components/ui/dropdown";
 import { Anchor } from "../ui/anchor";
-import { getConfig } from "@/lib/config";
+import { getYearConfig } from "@/config/utils";
+import { getProblemLink, getLeaderboardLink } from "@/lib/utils";
 
 export default function Header() {
-  const config = getConfig(2025);
+  const config = getYearConfig(2025);
   const now = new Date();
 
   // Filter only active
@@ -14,13 +15,13 @@ export default function Header() {
   const problems = activeProblems.map((problem) => ({
     id: problem.problem_num,
     title: "Zadatak " + problem.problem_num,
-    href: `/problems/${config.year}/${problem.problem_num}`,
+    href: getProblemLink(config.year, problem.problem_num),
   }));
 
   const leaderboards = activeProblems.map((problem) => ({
     id: problem.problem_num,
     title: "Zadatak " + problem.problem_num,
-    href: `/leaderboard/${config.year}/${problem.problem_num}`,
+    href: getLeaderboardLink(config.year, problem.problem_num),
   }));
 
   return (
