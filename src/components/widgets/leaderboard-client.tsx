@@ -139,7 +139,7 @@ export default function LeaderboardClient() {
 
       {/* Back to Problem Link */}
       <Anchor
-        href={`/problem/${year_num}/${problem_num}`}
+        href={`/problems/${year_num}/${problem_num}`}
         className="mb-4 text-xs sm:text-sm"
       >
         ← Vrati se na zadatak

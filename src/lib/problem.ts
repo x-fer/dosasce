@@ -1,6 +1,6 @@
 export function getYearNumAndProblemNumFromPathname(
   pathname: string,
-  page: "problem" | "leaderboard",
+  page: "problems" | "leaderboard",
 ) {
   const match = pathname.match(new RegExp(`^/${page}/(\\d+)/(\\d+)$`));
 

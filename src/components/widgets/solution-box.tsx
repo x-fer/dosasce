@@ -15,7 +15,7 @@ export default function SolutionBox() {
   const pathname = usePathname();
   const { year_num, problem_num } = getYearNumAndProblemNumFromPathname(
     pathname,
-    "problem",
+    "problems",
   );
   const { user } = useAuthClient();
   const currentUserId = user?.id;

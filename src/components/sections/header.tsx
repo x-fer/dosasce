@@ -10,7 +10,7 @@ export default function Header() {
     .map((problem) => ({
       id: problem.problem_num,
       title: "Zadatak " + problem.problem_num,
-      href: `/problem/${config.year}/${problem.problem_num}`,
+      href: `/problems/${config.year}/${problem.problem_num}`,
     }));
 
   const leaderboards = config.problems

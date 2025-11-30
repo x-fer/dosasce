@@ -17,7 +17,7 @@ const faq: AccordionItem[] = [
         osmisliti algoritam koji pronalazi što bolje rješenje u ograničenom
         vremenu. Primjer zadatka možete pronaći{" "}
         <Anchor
-          href="/problem/example"
+          href="/problems/example"
           className="text-dosasce-red underline hover:opacity-60"
         >
           ovdje
