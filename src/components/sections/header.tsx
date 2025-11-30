@@ -1,3 +1,5 @@
+"use client";
+
 import { HeaderDropdown } from "@/components/ui/dropdown";
 import { Anchor } from "../ui/anchor";
 import { getYearConfig } from "@/config/utils";
