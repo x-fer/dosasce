@@ -1,11 +1,14 @@
 import { getConfig } from "@/lib/config";
 import { cn, formatDateHR } from "@/lib/utils";
+import { Anchor } from "@/components/ui/anchor";
 
 type TimelineBoxProps = {
   name: string;
   startDate: Date;
   endDate?: Date;
   location?: string;
+  problemLink?: string;
+  isOpen?: boolean;
 };
 
 function TimelineBox(props: TimelineBoxProps) {
@@ -13,15 +16,26 @@ function TimelineBox(props: TimelineBoxProps) {
     <div className="border-dosasce-red bg-dosasce-white z-20 my-8 flex h-40 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border-6 p-2 md:my-12 md:h-48 md:w-64 md:rounded-3xl md:border-8 md:p-4">
       <h1 className="mb-2 font-serif text-4xl md:text-5xl">{props.name}</h1>
 
-      <p className="font-sans text-xl md:text-2xl">
-        {props.endDate && "od "}
-        {formatDateHR(props.startDate)}
-      </p>
-
-      {props.endDate && (
-        <p className="font-sans text-xl md:text-2xl">
-          do {formatDateHR(props.endDate)}
-        </p>
+      {props.isOpen && props.problemLink ? (
+        <Anchor
+          href={props.problemLink}
+          className="text-dosasce-red hover:text-dosasce-red/80 font-sans text-xl font-semibold underline transition-colors md:text-2xl"
+        >
+          Otvori zadatak
+        </Anchor>
+      ) : (
+        <>
+          {props.startDate && (
+            <p className="font-sans text-xl md:text-2xl">
+              od {formatDateHR(props.startDate)}
+            </p>
+          )}
+          {props.endDate && (
+            <p className="font-sans text-xl md:text-2xl">
+              do {formatDateHR(props.endDate)}
+            </p>
+          )}
+        </>
       )}
 
       {props.location && (
@@ -41,6 +55,8 @@ type TimelineCardProps = {
   image?: string;
   location?: string;
   awards?: boolean;
+  problemLink?: string;
+  isOpen?: boolean;
 };
 
 function TimelineCard(props: TimelineCardProps) {
@@ -107,6 +123,8 @@ function TimelineCard(props: TimelineCardProps) {
         startDate={props.startDate}
         endDate={props.endDate}
         location={props.location}
+        problemLink={props.problemLink}
+        isOpen={props.isOpen}
       />
     </div>
   );
@@ -114,6 +132,7 @@ function TimelineCard(props: TimelineCardProps) {
 
 export default function Timeline() {
   const yearConfig = getConfig(2025);
+  const now = new Date();
 
   const timelineImages = [
     "/assets/images/mistletoe.png",
@@ -127,20 +146,23 @@ export default function Timeline() {
       id="timeline"
       className="bg-dosasce-white bg-snow-pattern flex w-full flex-col items-center"
     >
-      {yearConfig.problems
-        .filter((problem) => problem.problem_num !== 8)
-        .map((problem, index) => {
-          return (
-            <TimelineCard
-              key={problem.problem_num}
-              name={"Zadatak " + problem.problem_num}
-              startDate={problem.startDate}
-              endDate={problem.endTime}
-              image={timelineImages[index]}
-              left={index % 2 === 0}
-            />
-          );
-        })}
+      {yearConfig.problems.map((problem, index) => {
+        const isOpen = now >= problem.startDate && now <= problem.endTime;
+        const problemLink = `/problems/${yearConfig.year}/${problem.problem_num}`;
+
+        return (
+          <TimelineCard
+            key={problem.problem_num}
+            name={"Zadatak " + problem.problem_num}
+            startDate={problem.startDate}
+            endDate={problem.endTime}
+            image={timelineImages[index]}
+            left={index % 2 === 0}
+            problemLink={problemLink}
+            isOpen={isOpen}
+          />
+        );
+      })}
 
       <TimelineCard
         name="Dodjela"
