@@ -245,53 +245,60 @@ export function HeaderDropdown({
       >
         <div className="space-y-2 px-4 py-2 md:space-y-3 md:px-6 md:py-3">
           {/* Zadaci Section */}
-          <div>
-            <div className="mb-1.5 flex items-center gap-2 px-2">
-              <Code size={18} className="text-dosasce-red mt-1 md:h-5 md:w-5" />
-              <h3 className="text-dosasce-red font-serif text-base font-bold md:text-lg">
-                Zadaci
-              </h3>
-            </div>
-            <div className="space-y-0.5">
-              {problems.map((task) => (
-                <Anchor
-                  key={task.id}
-                  href={task.href}
-                  onClick={close}
-                  styled={false}
-                  className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
-                >
-                  {task.title}
-                </Anchor>
-              ))}
-            </div>
-          </div>
+          {problems.length > 0 && (
+            <>
+              <div className="mb-1.5 flex items-center gap-2 px-2">
+                <Code
+                  size={18}
+                  className="text-dosasce-red mt-1 md:h-5 md:w-5"
+                />
+                <h3 className="text-dosasce-red font-serif text-base font-bold md:text-lg">
+                  Zadaci
+                </h3>
+              </div>
+              <div className="space-y-0.5">
+                {problems.map((task) => (
+                  <Anchor
+                    key={task.id}
+                    href={task.href}
+                    onClick={close}
+                    styled={false}
+                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
+                  >
+                    {task.title}
+                  </Anchor>
+                ))}
+              </div>
+            </>
+          )}
 
           {/* Rang-lista Section */}
-          <div>
-            <div className="mb-1.5 flex items-center gap-2 px-2">
-              <Trophy
-                size={16}
-                className="text-dosasce-red mt-0.5 md:h-5 md:w-5"
-              />
-              <h3 className="text-dosasce-red font-serif text-base font-bold md:text-lg">
-                Rang lista
-              </h3>
-            </div>
-            <div className="space-y-0.5">
-              {leaderboards.map((leaderboard) => (
-                <Anchor
-                  key={leaderboard.id}
-                  href={leaderboard.href}
-                  onClick={close}
-                  styled={false}
-                  className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
-                >
-                  {leaderboard.title}
-                </Anchor>
-              ))}
-            </div>
-          </div>
+          {leaderboards.length > 0 && (
+            <>
+              <div className="mb-1.5 flex items-center gap-2 px-2">
+                <Trophy
+                  size={16}
+                  className="text-dosasce-red mt-0.5 md:h-5 md:w-5"
+                />
+                <h3 className="text-dosasce-red font-serif text-base font-bold md:text-lg">
+                  Rang lista
+                </h3>
+              </div>
+              <div className="space-y-0.5">
+                {leaderboards.map((leaderboard) => (
+                  <Anchor
+                    key={leaderboard.id}
+                    href={leaderboard.href}
+                    onClick={close}
+                    styled={false}
+                    className="text-dosasce-black hover:bg-dosasce-light-red hover:text-dosasce-red block rounded-lg py-1 pr-3 pl-6 font-sans text-xs transition-all duration-150 md:py-1.5 md:pr-4 md:pl-8 md:text-sm"
+                  >
+                    {leaderboard.title}
+                  </Anchor>
+                ))}
+              </div>
+            </>
+          )}
 
           {/* Arhiva Section */}
           <div className="border-dosasce-light-red border-t-2 pt-2 md:pt-3">

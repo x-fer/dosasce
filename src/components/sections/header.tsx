@@ -4,14 +4,20 @@ import { getConfig } from "@/lib/config";
 
 export default function Header() {
   const config = getConfig(2025);
+  const now = new Date();
 
-  const problems = config.problems.map((problem) => ({
+  // Filter only active
+  const activeProblems = config.problems.filter(
+    (problem) => now >= problem.startDate && now <= problem.endTime,
+  );
+
+  const problems = activeProblems.map((problem) => ({
     id: problem.problem_num,
     title: "Zadatak " + problem.problem_num,
     href: `/problems/${config.year}/${problem.problem_num}`,
   }));
 
-  const leaderboards = config.problems.map((problem) => ({
+  const leaderboards = activeProblems.map((problem) => ({
     id: problem.problem_num,
     title: "Zadatak " + problem.problem_num,
     href: `/leaderboard/${config.year}/${problem.problem_num}`,
