@@ -1,3 +1,5 @@
+"use client";
+
 import { getYearConfig } from "@/config/utils";
 import { cn, formatDateHR, getProblemLink } from "@/lib/utils";
 import { Anchor } from "@/components/ui/anchor";
