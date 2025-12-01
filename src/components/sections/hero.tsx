@@ -17,7 +17,7 @@ export default function Hero() {
         />
 
         <div className="text-dosasce-red flex flex-col font-serif">
-          <AnnouncementBanner title="Zadatak 1" />
+          <AnnouncementBanner title="Zadatak 1" visible />
           <h1 className="mt-[-8px] text-5xl lg:mt-[-12px] lg:text-7xl">
             došašće++
           </h1>
