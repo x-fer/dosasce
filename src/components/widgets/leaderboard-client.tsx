@@ -172,7 +172,7 @@ export default function LeaderboardClient() {
             <th className="px-2 py-1.5 text-center text-xs font-semibold text-gray-700 md:px-6 md:py-3 md:text-sm">
               Rang
             </th>
-            <th className="px-2 py-1.5 text-center text-xs font-semibold text-gray-700 md:px-6 md:py-3 md:text-sm">
+            <th className="px-2 py-1.5 text-start text-xs font-semibold text-gray-700 md:px-6 md:py-3 md:text-sm">
               Natjecatelj
             </th>
             <th className="px-2 py-1.5 text-center text-xs font-semibold text-gray-700 md:px-6 md:py-3 md:text-sm">
@@ -208,7 +208,7 @@ export default function LeaderboardClient() {
                     #{index + 1}
                   </td>
                   <td className="px-2 py-2 text-center text-xs md:px-6 md:py-4 md:text-sm">
-                    <div className="flex items-center justify-center gap-2 md:gap-3">
+                    <div className="flex items-center justify-start gap-2 md:gap-3">
                       {entry.avatar_url && (
                         <img
                           src={entry.avatar_url}
