@@ -63,8 +63,8 @@ Teoretski maksimum: 100 (svi susjedi 100)<br />
 Teoretski minimum: 0<br />
 Bodovi = (tvoja_minimalna_sreća) / 100 × 20 000
 
--> ako postji patuljak koji ima susjeda kojeg mrzi (jedan od njegov susjeda ima voljenost 0) = 0 bodova za ovaj dio<br />
--> ako postji patuljak koji jako voli sve svoje susjede (svi susjedi 100) = 20 000 bodova za ovaj dio
+-> ako postoji patuljak koji ima susjeda kojeg mrzi (jedan od njegov susjeda ima voljenost 0) = 0 bodova za ovaj dio<br />
+-> ako postoji patuljak koji jako voli sve svoje susjede (svi susjedi 100) = 20 000 bodova za ovaj dio
 
 ## Primjer
 
@@ -95,6 +95,14 @@ Ovo u prijevodu označava:
 1. red: 5 2 6
 2. red: 3 1 7
 3. red: 8 4 9
+
+Patuljak 5 je u gornjem lijevom kutu. Njegovi susjedi su patuljak 2 desno i patuljak 3 ispod. Njegova sreća je zbroj koliko voli patuljka 2 i koliko voli patuljka 3. U matrici to su brojevi na pozicijama (5,2) i (5,3), odnosno 26 i 51. Sreća patuljka 5 je 26 + 51 = 77. Njegova minimalna sreća prema susjedima je manji od ta dva broja, znači 26.
+
+Za patuljka 2 koji je gore u sredini susjedi su patuljak 5 lijevo, patuljak 6 desno i patuljak 1 dolje. Njegova sreća je zbroj brojeva (2,5), (2,6) i (2,1) odnosno 67 + 57 + 0 = 124. Njegova minimalna sreća prema susjedima je najmanji od ta tri broja, ovdje 0.
+
+Patuljak 1 je u sredini slike. Njegovi susjedi su patuljak 2 gore, patuljak 4 dolje, patuljak 3 lijevo i patuljak 7 desno. Njegova sreća je zbroj brojeva (1,2), (1,4), (1,3) i (1,7), odnosno 39 + 24 + 80 + 33 = 176. Njegova minimalna sreća prema susjedima je najmanji od ta četiri broja, u ovom slučaju 24.
+
+Na isti način računa se sreća za preostale patuljake. Ukupna sreća slike je zbroj sreća svih patuljaka. Minimalna sreća slike je najmanja minimalna sreća među svim patuljcima, znači uzme se patuljak koji je prema svojim susjedima najmanje zadovoljan i njegova vrijednost definira minimalnu sreću cijele slike. U ovome primjeru ukupna sreća je 1090, a minimalna sreća je 0.
 
 Sada je na tebi da za pravi problem od 1000 patuljaka pronađeš raspored u kojem su svi što sretniji!
 
