@@ -32,27 +32,39 @@ Primjer izlaza:
 
 ## Bodovanje
 
+Bodovanje se sastoji od dva dijela:
+
+1. Ukupna sreća
+2. Minimalna sreća
+
+Bodovna skala je [0, 100 000].<br />
+Ukupan broj bodova = Ukupna sreća + Minimalna sreća
+
+### Ukupna sreća (80% bodova)
+
 Svaki patuljak gleda samo svoje orto-susjede (gore, dolje, lijevo, desno):
 
-Sreća pojedinog patuljka = zbroj voljenosti prema svim njegovim orto-susjedima
-Ukupna sreća = zbroj sreća svih 1000 patuljaka
+Sreća pojedinog patuljka = zbroj sreća prema svim njegovim orto-susjedima<br />
+Ukupna sreća = zbroj sreća svih patuljaka
 
-Nesreća pojedinog patuljka = najmanja sreća prema bilo kojem orto-susjedu
+Teoretski maksimum: 378 000 (svi susjedi 100)<br />
+Teoretski minimum: 0 (svi susjedi 0)<br />
+Bodovi = ( tvoja_ukupna_sreća ) / 378 000 × 80 000
+
+-> ako svaki patuljak mrzi sve svoje susjede (svi susjedi 0) = 0 bodova za ovaj dio<br />
+-> ako svaki patuljak jako voli sve svoje susjede (svi susjedi 100) = 80 000 bodova za ovaj dio
+
+### Minimalna sreća (20% bodova)
+
+Nesreća pojedinog patuljka = najmanja sreća prema bilo kojem orto-susjedu<br />
 Minimalna sreća = najmanja sreća bilo kojeg patuljka prema orto-susjedima na slici
 
-80 % – Ukupna sreća (80 000 bodova) <br />
-Teoretski maksimum: 378 000 (svi susjedi 100)<br />
-Teoretski minimum: 0<br />
-Bodovi = ( tvoja_sreća ) / 378 000 × 80 000
-
--> ako se svaki patuljak mrzi sa svim susjedima → 0 bodova za ovaj dio
-
-20 % – Minimalna sreća (20 000 bodova)<br />
 Teoretski maksimum: 100 (svi susjedi 100)<br />
 Teoretski minimum: 0<br />
 Bodovi = (tvoja_minimalna_sreća) / 100 × 20 000
 
--> ako netko ima susjeda kojeg mrzi 0 → 0 bodova za ovaj dio
+-> ako postji patuljak koji ima susjeda kojeg mrzi (jedan od njegov susjeda ima voljenost 0) = 0 bodova za ovaj dio<br />
+-> ako postji patuljak koji jako voli sve svoje susjede (svi susjedi 100) = 20 000 bodova za ovaj dio
 
 ## Primjer
 
