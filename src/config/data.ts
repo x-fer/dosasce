@@ -89,6 +89,77 @@ export const data = {
         problem_num: 2,
         startDate: new Date(2025, 11, 6, 0, 0), // 6.12.2025. 00:00 Croatian time
         endTime: new Date(2025, 11, 19, 23, 59), // 19.12.2025. 23:59 Croatian time
+        sanitize: (input) => {
+          if (input.includes("\t")) {
+            return {
+              type: RESPONSE_TYPE.ERROR,
+              value: "Unos ne smije sadržavati tabove.",
+            };
+          }
+
+          const lines = input.trim().split("\n");
+
+          if (lines.length !== 140) {
+            return {
+              type: RESPONSE_TYPE.ERROR,
+              value: "Rješenje mora sadržavati točno 140 redaka.",
+            };
+          }
+
+          const all: number[] = [];
+
+          for (const line of lines) {
+            const parts = line.trim().split(" ");
+
+            if (parts.some((p) => p === "")) {
+              return {
+                type: RESPONSE_TYPE.ERROR,
+                value: "Ne smiju postojati prazni elementi u retku.",
+              };
+            }
+
+            for (const p of parts) {
+              const n = Number(p);
+
+              if (!Number.isInteger(n)) {
+                return {
+                  type: RESPONSE_TYPE.ERROR,
+                  value: "Indeksi moraju biti cijeli brojevi.",
+                };
+              }
+
+              if (n < 0 || n > 419) {
+                return {
+                  type: RESPONSE_TYPE.ERROR,
+                  value: "Svi indeksi moraju biti između 0 i 419.",
+                };
+              }
+
+              all.push(n);
+            }
+          }
+
+          if (all.length !== 420) {
+            return {
+              type: RESPONSE_TYPE.ERROR,
+              value: "Ukupan broj indeksa mora biti točno 420.",
+            };
+          }
+
+          const unique = new Set(all);
+
+          if (unique.size !== 420) {
+            return {
+              type: RESPONSE_TYPE.ERROR,
+              value: "Svi indeksi moraju biti jedinstveni.",
+            };
+          }
+
+          return {
+            type: RESPONSE_TYPE.SUCCESS,
+            value: "",
+          };
+        },
       },
       {
         problem_num: 3,

@@ -1,0 +1,86 @@
+import CoverImage from "@/components/ui/cover-image";
+import InputChecker from "@/components/widgets/input-checker";
+import SolutionBox from "@/components/widgets/solution-box";
+
+<CoverImage src="/problem-assets/2025/2/cover.png" alt="Djedove saonice" />
+
+# Djedove Saonice
+
+Djed Mraz suočava se s golemim logističkim izazovom: mora rasporediti 420 izuzetno teških paketa (poklona) na svojih 140 raspoloživih saonica.
+
+Svaki paket ima ogromnu težinu. Težine su cijeli brojevi između **10^13** i **10^14**.
+
+Djed Mraz zahtijeva vašu pomoć kako bi osigurao da su sve saonice što je moguće ravnomjernije opterećene. Njegovi sobovi, umorni od duge sezone, bit će najsretniji ako najveća ukupna težina bilo kojih pojedinih saonica bude minimalna.
+
+Vaš zadatak je rasporediti pakete po saonicama tako da najveće ukupno opterećenje bilo kojih saonica bude što je moguće manje.
+
+## Ulazni podaci
+
+Ulazni podaci sastoje se od 420 brojeva (težina iz teksta zadatka) razdvojenih novim redom (eng. newline).
+
+Primjer:
+22277302519162
+75947866978990
+95962420265476
+51912118423886
+...
+
+BITNO!
+Položaj težine u ulaznom skupu definira njezin redni broj (indeks). Indeksiranje počinje od 0 za prvi redak i ide do 419 za zadnji redak. Vaš izlaz sastoji se od indeksa težina, ne njih samih.
+
+## Izlazni podaci
+
+Vaš izlaz mora sadržavati točno 140 redaka, gdje svaki redak predstavlja jedne saonice. Prvi red predstavlja prve saonice, drugi redak druge saonice, i tako dalje.
+
+Svaki redak sadržavat će indekse poklona odvojene razmakom koji su dodijeljeni tim saonicama. Naravno, **svaki indeks mora biti** raspoređen u saonice.
+
+## Bodovanje
+
+Bodovi se temelje na najvećem zbroju težina bilo kojih saonica:
+
+```txt
+  score = 100 000 × (D_MAX – najteze_saonice) / (D_MAX – D_MIN)
+```
+
+gdje su:
+
+**D_MAX** - vrijednost odabrana kako bi raspon bodova bio širi. To nije teoretski najgori mogući rezultat nego najveća suma dobivena najjednostavnijim greedy algoritmom koji ne koristi sortiranje. Njegova vrijednost je **230136843644340**
+
+**D_MIN** – predstavlja teoretski optimum. To je ukupna suma svih težina podijeljena s brojem paketa, zaokružena na veću vrijednost. Njegova vrijednost je **171514003252241**.
+
+Rezultat je između 0 i 100000 bodova
+
+Što je najveća težina manja, rezultat je bolji.
+
+## Primjer
+
+Ovo je pojednostavljeni primjer s 6 paketa i 2 saonicama (Težine su znatno manje radi lakšeg razumijevanja):
+
+### Ulaz
+
+```txt
+12
+16
+24
+32
+40
+48
+```
+
+### Izlaz
+
+```txt
+0 5 1
+2 4 3
+```
+
+Na prve saonice stavili smo poklone s indeksima 0, 5 i 1 (težine 12, 48 i 16) što daje ukupnu težinu 76. Na druge saonice stavili smo poklone s indeksima 2, 4 i 3 (težine 24, 40 i 32) što daje ukupnu težinu 96. Najveća težina saonica je 96. Ova težina se koristi u formuli za bodovanje.
+
+Sretno i veselo kodiranje! 🎄📸
+
+<InputChecker
+  inputFileUrl="/problem-assets/2025/2/input.txt"
+  checkerFileUrl="/problem-assets/2025/2/tester.py"
+/>
+
+<SolutionBox />
