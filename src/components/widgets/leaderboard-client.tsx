@@ -196,11 +196,15 @@ export default function LeaderboardClient() {
           ) : (
             filteredLeaderboard.map((entry, index) => {
               const isCurrentUser = currentUserId === entry.user_id;
-              const bgClass = isCurrentUser
-                ? "bg-dosasce-light-red"
-                : index % 2 === 0
-                  ? "bg-white"
-                  : "bg-gray-50";
+              const isWinner =
+                selectedCategory !== CATEGORY.OPEN && index >= 0 && index <= 2;
+              const bgClass = isWinner
+                ? "bg-dosasce-light-green"
+                : isCurrentUser
+                  ? "bg-dosasce-light-red"
+                  : index % 2 === 0
+                    ? "bg-white"
+                    : "bg-gray-50";
 
               return (
                 <tr key={entry.user_id} className={bgClass}>
