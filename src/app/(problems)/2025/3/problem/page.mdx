@@ -1,0 +1,143 @@
+import CoverImage from "@/components/ui/cover-image";
+import InputChecker from "@/components/widgets/input-checker";
+import SolutionBox from "@/components/widgets/solution-box";
+
+<CoverImage src="/problem-assets/2025/3/cover.png" alt="Djedičina ruta" />
+
+# Dostava poklona Djeda Mraza
+
+Božić je jako blizu pa se djedica priprema za svoju misiju dostave poklona. Ove godine ima cijelu flotu saonica koje će mu pomoći u dostavi darova dobroj djeci diljem grada.
+
+Svake saonice imaju određeni kapacitet i potrošnju goriva (hrana za sobove zapravo, ali koristimo gorivo da bude jednostavnije :D). Svako odredište ima popis željenih poklona. Budući da je inflacija u velikom porastu, djedica želi smanjiti ukupne troškove i istovremeno zadržati sve sretnima. Tvoj zadatak je pomoći mu optimizirati plan dostave odabirom pravih ruta za njegove saonice.
+
+Djedičina baza se nalazi u ishodištu 2D koordinatnog sustava, a svako odredište je definirano svojim koordinatama (X, Y) i popisom željenih poklona. Djedica kod sebe ima beskonačnu količinu poklona svakog tipa koje će rasporediti na saonice tako da minimizira potrošnju goriva. Nije moguće prebacivanje poklona s jednih saonica na druge tijekom dostave poklona.
+
+## Ulazni podaci
+
+1. red: broj poklona N
+2. red: N prirodnih brojeva odvojenih razmakom, gdje _i_-ti broj predstavljaja težinu _i_-tog poklona (i = 1, 2, ..., N)
+3. red: broj saonica M
+4. red: M prirodnih brojeva odvojenih razmakom, gdje _i_-ti broj predstavljaja kapacitet _i_-tih saonica (i = 1, 2, ..., M)
+5. red: M prirodnih brojeva odvojenih razmakom, gdje _i_-ti broj predstavljaja potrošnju goriva _i_-tih saonica (i = 1, 2, ..., M)
+6. red: broj odredišta K
+
+Idućih K redova sadrži:
+
+- X, Y koordinate pojedinog odredišta (decimalni brojevi odvojeni razmakom)
+- zatim vertikalnu crtu koja odvaja koordinate od liste poklona
+- listu poklona - mapa tipova poklona i tražene količine (format tip:količina, a pojedini parovi podataka odvojeni zarezom)
+
+Pokloni, saonice i odredišta su indeksirani počevši od 1.
+
+## Izlazni podaci
+
+M redova koji predstavaljaju rute saonica. U prvom redu nalazi se opis rute prvih saonice, u drugom redu za druge saonice itd.
+
+Rutu za jedne saonice opisujemo nizom podataka razdvojenih razmakom. Svaki dio podataka sastoji se od indeksa odredišta te liste poklona koju na tom odredištu ostavljaju te saonice. Oznaka odredišta i pokloni odvojeni su vertikalnom crtom (|), a lista je opisana mapom (tip:količina) kao i u ulaznim podacima.
+
+Ako pojedine saonice ne upotrebljujemo koristimo oznaku minus (-). Nije potrebno koristiti sve saonice.
+
+## Bodovanje
+
+Bodovanje se sastoji od dva dijela:
+
+- Ukupna učinkovitost dostave
+- Najmanje prosječno opterećenje saonica
+
+Ukupan broj bodova je u rasponu [0, 100 000].
+
+Ukupan rezultat računa se kao zbroj bodova iz oba dijela.
+
+### Ukupna učinkovitost dostave (70% bodova)
+
+Ukupna učinkovitost mjeri koliko je djedica uspješno dostavio sve poklone uz što manju potrošnju goriva.
+
+Za svake saonice računa se njihov trošak dostave:
+
+```txt
+trošak_saonica(i) = prijeđena_udaljenost(i) × potrošnja_goriva(i)
+```
+
+Ukupna potrošnja goriva definira se kao:
+
+```txt
+ukupna_potrošnja = suma(trošak_saonica(i)) za i = 1, ..., M
+```
+
+Bodovi za ovaj dio računaju se pomoću sljedeće funkcije:
+
+```txt
+bodovi = 70 000 / (1 + ukupna_potrošnja / S)
+```
+
+gdje je S = 40 000 (konstanta skale dobivena iz ulaznih podataka korištenjem harmonijske sredine potrošnje goriva saonica).
+
+### Najmanje prosječno opterećenje saonica (30% bodova)
+
+Ovaj dio bodovanja kažnjava rješenja u kojima su pojedine saonice preopterećene, dok druge nisu učinkovito iskorištene.
+
+Za svake saonice računa se njihovo opterećenje:
+
+```txt
+opterećenje_saonica(i) = teret_saonica(i) / kapacitet_saonica(i)
+```
+
+Zatim uzimamo raspon najvećeg i najmanjeg opterećenja svih saonica:
+
+```txt
+raspon = max_opterećenje − min_opterećenje
+```
+
+Bodovi za ovaj dio:
+
+bodovi = (1 − raspon)² × 30 000
+
+_Napomena:_
+
+- prijeđena_udaljenost računa se po klasičnoj euklidskoj formuli za udaljenost dvaju točaka, a uključuje put **od** i **do ishodišta** u točki (0, 0).
+- teret saonica ne može biti veći od kapaciteta saonica
+
+## Primjer
+
+### Ulaz
+
+Razmotrimo pojednostavljeni primjer s 2 poklona, 3 saonice i 4 odredišta:
+
+```txt
+2                       # Broj poklona
+2 5                     # Teret pojedinog poklona
+10 25                   # Vrijednost pojedinog poklona
+3                       # Broj saonica
+40 30 100               # Kapaciteti saonica
+5 3 150                 # Potrošnja goriva po jedinici udaljenosti
+4                       # Broj odredišta
+0.50 0.20|1:1,2:2       # Odredište 1: Koordinate | Željeni pokloni (Tip poklona:Količina)
+-0.30 0.80|1:1,2:1      # Odredište 2: Koordinate | Željeni pokloni (Tip poklona:Količina)
+1.00 -0.40|1:2          # Odredište 3: Koordinate | Željeni pokloni (Tip poklona:Količina)
+-0.70 -0.60|2:2         # Odredište 4: Koordinate | Željeni pokloni (Tip poklona:Količina)
+```
+
+### Izlaz
+
+Vaš program bi mogao vratiti:
+
+```txt
+4|2:2
+2|1:1,2:1 1|1:1,2:2 3|1:2
+-
+```
+
+Svaki red predstavlja putanju jednih saonica.
+
+- Prve saonice idu sa ishodišta na odredište 4 i tamo ostavljaju dva poklona tipa 2. Nakon toga se vraćaju natrag djedici.
+- Druge saonice idu sa ishodišta na odredište 2 i tamo ostavljaju jedan poklona tipa 1 i jedan poklon tipa 2. Zatim odlaze na odredište 1 i tamo ostavljaju jedan poklon tipa 1 i dva poklona tipa 2. Na kraju idu na odredište 3 i ostavljaju dva poklona tipa 1. Nakon toga se vraćaju natrag djedici.
+- Treće saonice nisu korištene.
+
+Sretno i veselo kodiranje! 🎄📸
+
+<InputChecker
+  inputFileUrl="/problem-assets/2025/3/input.txt"
+  checkerFileUrl="/problem-assets/2025/3/tester.py"
+/>
+
+<SolutionBox />
