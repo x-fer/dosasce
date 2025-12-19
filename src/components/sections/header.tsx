@@ -11,7 +11,7 @@ export default function Header() {
 
   // Filter only active
   const activeProblems = config.problems.filter(
-    (problem) => now >= problem.startDate && now <= problem.endTime,
+    (problem) => now >= problem.startDate,
   );
 
   const problems = activeProblems.map((problem) => ({
