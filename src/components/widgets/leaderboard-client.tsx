@@ -56,7 +56,7 @@ export default function LeaderboardClient() {
 
   // Default category
   const [selectedCategory, setSelectedCategory] = useState<FilterCategory>(
-    userCategory || "ukupno",
+    userCategory || CATEGORY.UKUPNO,
   );
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function LeaderboardClient() {
 
   const filteredLeaderboard = useMemo(() => {
     if (!leaderboard) return [];
-    if (selectedCategory === "ukupno") return leaderboard;
+    if (selectedCategory === CATEGORY.UKUPNO) return leaderboard;
     return leaderboard.filter(
       (entry) => entry.user_category === selectedCategory,
     );
@@ -108,7 +108,7 @@ export default function LeaderboardClient() {
   }
 
   const categories: FilterCategory[] = [
-    "ukupno",
+    CATEGORY.UKUPNO,
     CATEGORY.OSNOVNA,
     CATEGORY.SREDNJA,
     CATEGORY.PREDDIPLOMSKI,
@@ -196,11 +196,19 @@ export default function LeaderboardClient() {
           ) : (
             filteredLeaderboard.map((entry, index) => {
               const isCurrentUser = currentUserId === entry.user_id;
-              const isWinner =
-                selectedCategory !== CATEGORY.OPEN &&
-                entry.user_category !== CATEGORY.OPEN &&
-                index >= 0 &&
-                index <= 2;
+
+              let isWinner = false;
+              if (selectedCategory === CATEGORY.UKUPNO) {
+                const ukupnoWinners = filteredLeaderboard
+                  .filter((entry) => entry.user_category !== CATEGORY.OPEN)
+                  .toSpliced(0, 3);
+
+                isWinner = ukupnoWinners.some(
+                  (w) => w.user_id === entry.user_id,
+                );
+              } else if (selectedCategory !== CATEGORY.OPEN) {
+                isWinner = index >= 0 && index <= 2;
+              }
 
               const bgClass = isWinner
                 ? "bg-dosasce-light-green"

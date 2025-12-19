@@ -1,4 +1,5 @@
 export const CATEGORY = {
+  UKUPNO: "ukupno",
   OSNOVNA: "osnovna",
   SREDNJA: "srednja",
   PREDDIPLOMSKI: "preddiplomski",
@@ -10,7 +11,7 @@ export type CategoryValue = (typeof CATEGORY)[keyof typeof CATEGORY];
 
 export const VALID_CATEGORIES = Object.values(CATEGORY);
 
-export type FilterCategory = "ukupno" | CategoryValue;
+export type FilterCategory = CategoryValue;
 
 export const CATEGORY_LABELS: Record<FilterCategory, string> = {
   ukupno: "Ukupno",
