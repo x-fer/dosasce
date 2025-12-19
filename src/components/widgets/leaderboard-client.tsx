@@ -116,6 +116,10 @@ export default function LeaderboardClient() {
     CATEGORY.OPEN,
   ];
 
+  const ukupnoWinners = filteredLeaderboard
+    .filter((entry) => entry.user_category !== CATEGORY.OPEN)
+    .slice(0, 3);
+
   return (
     <>
       <h1 className="mb-2 text-3xl font-bold">Rang lista</h1>
@@ -199,10 +203,6 @@ export default function LeaderboardClient() {
 
               let isWinner = false;
               if (selectedCategory === CATEGORY.UKUPNO) {
-                const ukupnoWinners = filteredLeaderboard
-                  .filter((entry) => entry.user_category !== CATEGORY.OPEN)
-                  .toSpliced(0, 3);
-
                 isWinner = ukupnoWinners.some(
                   (w) => w.user_id === entry.user_id,
                 );
