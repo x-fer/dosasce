@@ -44,6 +44,16 @@ function checkRateLimit(userId: string): {
 }
 
 export async function POST(request: Request) {
+  if (process.env.COMPETITION_ENDED === "true") {
+    return NextResponse.json(
+      {
+        type: RESPONSE_TYPE.ERROR,
+        value: "Natjecanje je zavrsilo",
+      },
+      { status: 410 },
+    );
+  }
+
   try {
     const supabase = await createServer();
     const supabaseAdmin = createAdminServer();

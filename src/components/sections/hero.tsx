@@ -17,7 +17,11 @@ export default function Hero() {
         />
 
         <div className="text-dosasce-red flex flex-col font-serif">
-          <AnnouncementBanner title="Zadatak 3" visible />
+          <AnnouncementBanner
+            title="Natjecanje je završilo"
+            description="Dodjela nagrada - 20.12. 18:00, FER, Unska 3, A201"
+            visible
+          />
           <h1 className="mt-[-8px] text-5xl lg:mt-[-12px] lg:text-7xl">
             došašće++
           </h1>

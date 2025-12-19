@@ -1,10 +1,12 @@
 type AnnouncementBannerProps = {
   title: string;
+  description: string;
   visible?: boolean;
 };
 
 export default function AnnouncementBanner({
   title,
+  description,
   visible = false,
 }: AnnouncementBannerProps) {
   if (!visible) return null;
@@ -14,11 +16,10 @@ export default function AnnouncementBanner({
       <div className="bg-dosasce-green h-2 w-2 animate-pulse rounded-full" />
       <div className="flex flex-col gap-0.5">
         <p className="text-dosasce-red font-serif text-xs leading-tight font-bold md:text-sm">
-          Novi zadatak otvoren!
+          {title}
         </p>
         <p className="font-sans text-xs leading-tight text-gray-600 md:text-sm">
-          <span className="font-semibold text-gray-800">{title}</span> je sada
-          dostupan.
+          {description}
         </p>
       </div>
     </div>
