@@ -5,6 +5,7 @@ import Organizers from "@/components/sections/organizers";
 import Contact from "@/components/sections/contact";
 import FAQ from "@/components/sections/faq";
 import Separator from "@/components/ui/separator";
+import Sponsors from "@/components/sections/sponsors";
 
 export default function Home() {
   return (
@@ -24,6 +25,10 @@ export default function Home() {
       <Organizers />
 
       <Separator variant="snowflake" />
+
+      <Sponsors />
+
+      <Separator variant="circles" />
 
       <Contact />
 
