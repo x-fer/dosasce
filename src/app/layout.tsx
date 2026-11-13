@@ -40,7 +40,7 @@ export default function RootLayout({
 
         <QueryProvider>
           <Header />
-          <main className="flex h-full grow flex-col overflow-x-hidden overscroll-contain">
+          <main className="flex h-full grow flex-col overflow-x-hidden">
             {children}
           </main>
           <Footer />
