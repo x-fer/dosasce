@@ -38,6 +38,7 @@ export const Anchor = ({
     <>
       <Link
         href={href}
+        prefetch={false}
         target={target ?? defaultTarget}
         rel={rel ?? defaultRel}
         aria-label={ariaLabelValue ?? ariaLabelFallback}
