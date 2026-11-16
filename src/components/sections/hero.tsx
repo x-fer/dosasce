@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import AnnouncementBanner from "./announcement-banner";
 
@@ -32,13 +31,13 @@ export default function Hero() {
       </div>
 
       {/* Bouncing arrow */}
-      <Link
+      <a
         href="#timeline"
         className="text-dosasce-red hover:text-dosasce-dark-red absolute bottom-2 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer transition-colors md:bottom-10"
         aria-label="Scroll to timeline"
       >
         <ChevronDown size={48} strokeWidth={3} />
-      </Link>
+      </a>
     </section>
   );
 }
