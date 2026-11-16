@@ -12,6 +12,9 @@ interface LeaderboardEntry {
 export function useLeaderboard(year_num: number, problem_num: number) {
   return useQuery<LeaderboardEntry[]>({
     queryKey: ["leaderboard", year_num, problem_num],
+    // Stop automatic fetching after three failed attempts; reload to try again.
+    retry: 2,
+    enabled: (query) => query.state.status !== "error",
     queryFn: async () => {
       const response = await fetch(
         `/api/leaderboard/${year_num}/${problem_num}`,
